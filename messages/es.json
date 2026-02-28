@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "articles": "Artículos",
+    "store": "Tienda",
+    "manifesto": "Manifiesto",
+    "access": "Acceso",
+    "search": "Buscar",
+    "cart": "Carrito",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "home": {
+    "noArticles": "Sin artículos publicados."
+  },
+  "article": {
+    "back": "Volver",
+    "readArticle": "Leer artículo",
+    "updatedAt": "ACTUALIZADO:",
+    "by": "Por",
+    "readTime": "MIN",
+    "end": "Fin del artículo.",
+    "author": "Autor",
+    "readTimeLabel": "Tiempo de lectura",
+    "shareLabel": "Compartir",
+    "bookmarkLabel": "Guardar"
+  },
+  "paywall": {
+    "title": "SÓLO PARA SUSCRIPTORES",
+    "message": "Este artículo es exclusivo para suscriptores de Latente. Únete para acceder al análisis completo.",
+    "cta": "Suscribirse"
+  },
+  "premium": {
+    "label": "CLASIFICADO"
+  },
+  "store": {
+    "heading1": "TIENDA.",
+    "heading2": "",
+    "subtitle": "Publicaciones, objetos y membresías de Latente.",
+    "noProducts": "Sin productos disponibles.",
+    "addToCart": "Agregar {name} al carrito"
+  },
+  "cart": {
+    "title": "Carrito",
+    "close": "Cerrar carrito",
+    "empty": "Carrito vacío",
+    "total": "Total",
+    "checkout": "Pagar",
+    "removeItem": "Eliminar del carrito",
+    "decreaseQty": "Reducir cantidad",
+    "increaseQty": "Aumentar cantidad"
+  },
+  "checkout": {
+    "emptyCart": "Tu carrito está vacío.",
+    "heading1": "FINALIZAR",
+    "heading2": "PEDIDO.",
+    "paymentData": "Datos de pago",
+    "yourOrder": "Tu pedido",
+    "orderSummary": "Resumen del pedido",
+    "total": "Total",
+    "fullName": "Nombre completo",
+    "email": "Email",
+    "cardNumber": "Número de tarjeta",
+    "expiration": "Expiración",
+    "cvv": "CVV",
+    "namePlaceholder": "Tu nombre",
+    "cardPlaceholder": "0000 0000 0000 0000",
+    "expPlaceholder": "MM/AA",
+    "cvvPlaceholder": "000",
+    "submit": "Confirmar pedido",
+    "successTitle": "Pedido confirmado.",
+    "successMessage": "Recibirás un correo con los detalles.",
+    "backHome": "Volver al inicio"
+  },
+  "auth": {
+    "panelTitle1": "ACCESO.",
+    "panelTitle2": "",
+    "panelSubtitle": "Inicia sesión para leer el análisis completo.",
+    "loginTitle": "Iniciar sesión",
+    "registerTitle": "Crear cuenta",
+    "email": "Email",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Mínimo 8 caracteres",
+    "loginButton": "Iniciar sesión",
+    "registerButton": "Crear cuenta",
+    "noAccount": "¿No tienes cuenta?",
+    "register": "Registrarse",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "login": "Iniciar sesión"
+  },
+  "search": {
+    "placeholder": "Buscar artículos...",
+    "noResults": "Sin resultados para \"{query}\""
+  },
+  "newsletter": {
+    "heading1": "LATENTE.",
+    "heading2": "EN TU INBOX.",
+    "subtitle": "Análisis semanal. Sin ruido.",
+    "placeholder": "tu@email.com",
+    "submit": "Suscribirse",
+    "success": "Suscrito.",
+    "error": "Error al suscribirse. Intenta de nuevo."
+  },
+  "footer": {
+    "tagline": "Análisis profundo sobre las fuerzas que reconfiguran el mundo.",
+    "sections": "Secciones",
+    "network": "Red",
+    "premium": "Acceso Premium",
+    "rights": "© {year} LATENTE. Todos los derechos reservados.",
+    "articles": "Artículos",
+    "store": "Tienda",
+    "manifesto": "Manifiesto"
+  },
+  "ticker": {
+    "items": ["GEOPOLÍTICA", "INTELIGENCIA ARTIFICIAL", "BIO-INGENIERÍA", "ECONOMÍA"]
+  },
+  "manifesto": {
+    "cta": "Leer artículos"
+  },
+  "locale": {
+    "switchTo": "EN",
+    "switchLabel": "Switch to English"
+  }
+}

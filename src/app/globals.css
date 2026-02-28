@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F7F7F5;
+  --foreground: #111111;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Colors */
+  --color-brand:        #E60000;  /* Signal Red */
+  --color-brand-muted:  #FFB3B3;  /* Tint used on brand-red backgrounds (newsletter) */
+  --color-ink:          #111111;  /* Obsidian Black - primary dark surface */
+  --color-ink-subtle:   #222222;  /* Subtle dark (borders/dividers in dark contexts) */
+  --color-surface:      #F7F7F5;  /* Paper Bone - page/card background */
+  --color-surface-dim:  #F0F0EE;  /* Grayed surface - blockquotes, sidebars */
+  --color-border:       #333333;  /* Dark-context borders */
+  --color-divider:      #EEEEEE;  /* Light dividers (mobile nav menu) */
+  --color-muted:        #555555;  /* Secondary body text */
+  --color-meta:         #888888;  /* Labels, meta text, captions */
+  --color-dim:          #AAAAAA;  /* Faint text on dark backgrounds */
+
+  /* Brutalist shadow scale */
+  --shadow-brutal-sm:       2px 2px 0px var(--color-ink);
+  --shadow-brutal-sm-brand: 2px 2px 0px var(--color-brand);
+  --shadow-brutal:          4px 4px 0px var(--color-ink);
+  --shadow-brutal-brand:    4px 4px 0px var(--color-brand);
+  --shadow-brutal-lg:       8px 8px 0px var(--color-brand);
+  --shadow-brutal-xl:      12px 12px 0px var(--color-brand);
+
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar offset for fixed positioning */
+main {
+  padding-top: 72px;
+}

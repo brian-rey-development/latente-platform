@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "articles": "Articles",
+    "store": "Store",
+    "manifesto": "Manifesto",
+    "access": "Access",
+    "search": "Search",
+    "cart": "Cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "noArticles": "No published articles."
+  },
+  "article": {
+    "back": "Back",
+    "readArticle": "Read article",
+    "updatedAt": "UPDATED:",
+    "by": "By",
+    "readTime": "MIN",
+    "end": "End of article.",
+    "author": "Author",
+    "readTimeLabel": "Reading time",
+    "shareLabel": "Share",
+    "bookmarkLabel": "Bookmark"
+  },
+  "paywall": {
+    "title": "SUBSCRIBERS ONLY",
+    "message": "This article is exclusive to Latente subscribers. Join to read the full analysis.",
+    "cta": "Subscribe"
+  },
+  "premium": {
+    "label": "CLASSIFIED"
+  },
+  "store": {
+    "heading1": "STORE.",
+    "heading2": "",
+    "subtitle": "Publications, objects and Latente memberships.",
+    "noProducts": "No products available.",
+    "addToCart": "Add {name} to cart"
+  },
+  "cart": {
+    "title": "Cart",
+    "close": "Close cart",
+    "empty": "Empty cart",
+    "total": "Total",
+    "checkout": "Checkout",
+    "removeItem": "Remove from cart",
+    "decreaseQty": "Decrease quantity",
+    "increaseQty": "Increase quantity"
+  },
+  "checkout": {
+    "emptyCart": "Your cart is empty.",
+    "heading1": "CHECKOUT.",
+    "heading2": "",
+    "paymentData": "Payment details",
+    "yourOrder": "Your order",
+    "orderSummary": "Order summary",
+    "total": "Total",
+    "fullName": "Full name",
+    "email": "Email",
+    "cardNumber": "Card number",
+    "expiration": "Expiration",
+    "cvv": "CVV",
+    "namePlaceholder": "Your name",
+    "cardPlaceholder": "0000 0000 0000 0000",
+    "expPlaceholder": "MM/YY",
+    "cvvPlaceholder": "000",
+    "submit": "Confirm order",
+    "successTitle": "Order confirmed.",
+    "successMessage": "You will receive an email with the details.",
+    "backHome": "Back to home"
+  },
+  "auth": {
+    "panelTitle1": "ACCESS.",
+    "panelTitle2": "",
+    "panelSubtitle": "Sign in to read the full analysis.",
+    "loginTitle": "Sign in",
+    "registerTitle": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "passwordPlaceholder": "Minimum 8 characters",
+    "loginButton": "Sign in",
+    "registerButton": "Create account",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "hasAccount": "Already have an account?",
+    "login": "Sign in"
+  },
+  "search": {
+    "placeholder": "Search articles...",
+    "noResults": "No results for \"{query}\""
+  },
+  "newsletter": {
+    "heading1": "LATENTE.",
+    "heading2": "IN YOUR INBOX.",
+    "subtitle": "Weekly analysis. No noise.",
+    "placeholder": "your@email.com",
+    "submit": "Subscribe",
+    "success": "Subscribed.",
+    "error": "Error subscribing. Please try again."
+  },
+  "footer": {
+    "tagline": "Deep analysis on the forces reshaping the world.",
+    "sections": "Sections",
+    "network": "Network",
+    "premium": "Premium Access",
+    "rights": "© {year} LATENTE. All rights reserved.",
+    "articles": "Articles",
+    "store": "Store",
+    "manifesto": "Manifesto"
+  },
+  "ticker": {
+    "items": ["GEOPOLITICS", "ARTIFICIAL INTELLIGENCE", "BIO-ENGINEERING", "ECONOMICS"]
+  },
+  "manifesto": {
+    "cta": "Read articles"
+  },
+  "locale": {
+    "switchTo": "ES",
+    "switchLabel": "Cambiar a Español"
+  }
+}
