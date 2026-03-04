@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Search } from "lucide-react";
+import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { useCart } from "@/modules/cart/hooks/use-cart";
 import { SearchOverlay } from "@/modules/search/components/search-overlay";
 import { CategoryBar } from "@/layout/category-bar";
@@ -24,6 +24,7 @@ interface NavbarProps {
 export function Navbar({ articles = [] }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openCart, itemCount } = useCart();
   const pathname = usePathname();
 
@@ -32,6 +33,8 @@ export function Navbar({ articles = [] }: NavbarProps) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isArticlesPath = pathname.includes("/articulos");
 
   return (
     <>
@@ -49,7 +52,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
             </span>
           </Link>
 
-          {/* Section nav */}
+          {/* Desktop section nav */}
           <nav className="hidden md:flex items-center gap-6 ml-8" aria-label="Secciones">
             {NAV_LINKS.map(({ href, label, match }) => {
               const isActive = pathname.includes(match);
@@ -90,11 +93,41 @@ export function Navbar({ articles = [] }: NavbarProps) {
                 )}
               </button>
             )}
+
+            {/* Burger — mobile only */}
+            <button
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="md:hidden p-2 hover:text-brand transition-colors"
+              aria-label="Menú"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
 
-        {/* Category bar */}
-        <CategoryBar />
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-b-2 border-ink bg-surface">
+            {NAV_LINKS.map(({ href, label, match }) => {
+              const isActive = pathname.includes(match);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-6 py-4 font-mono text-sm font-bold uppercase tracking-widest border-b border-divider last:border-b-0 transition-colors
+                    ${isActive ? "text-brand bg-surface-dim" : "text-ink hover:text-brand"}`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Category bar — articles section only */}
+        {isArticlesPath && <CategoryBar />}
       </nav>
 
       <SearchOverlay

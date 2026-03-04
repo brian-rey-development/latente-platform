@@ -1,11 +1,12 @@
 import { defineField, defineType } from 'sanity'
 
 const CATEGORY_OPTIONS = [
-  { title: 'Geopolítica', value: 'GEOPOLÍTICA' },
   { title: 'Inteligencia Artificial', value: 'INTELIGENCIA ARTIFICIAL' },
   { title: 'Bio-Ingeniería', value: 'BIO-INGENIERÍA' },
-  { title: 'Cultura Sintética', value: 'CULTURA SINTÉTICA' },
+  { title: 'Geopolítica', value: 'GEOPOLÍTICA' },
   { title: 'Economía', value: 'ECONOMÍA' },
+  { title: 'Infraestructura', value: 'INFRAESTRUCTURA' },
+  { title: 'Cultura', value: 'CULTURA' },
 ]
 
 export const articleSchema = defineType({
@@ -27,11 +28,12 @@ export const articleSchema = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'category',
-      title: 'Categoría',
-      type: 'string',
+      name: 'categories',
+      title: 'Categorías',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: { list: CATEGORY_OPTIONS },
-      validation: (r) => r.required(),
+      validation: (r) => r.required().min(1),
     }),
     defineField({
       name: 'premium',
@@ -44,11 +46,13 @@ export const articleSchema = defineType({
       title: 'Extracto',
       type: 'text',
       rows: 3,
+      validation: (r) => r.required(),
     }),
     defineField({
       name: 'author',
       title: 'Autor',
       type: 'string',
+      validation: (r) => r.required(),
     }),
     defineField({
       name: 'publishedAt',
@@ -73,6 +77,12 @@ export const articleSchema = defineType({
       of: [{ type: 'block' }],
     }),
     defineField({ name: 'titleEn', title: 'Title (EN)', type: 'string' }),
+    defineField({
+      name: 'slugEn',
+      title: 'Slug (EN)',
+      type: 'slug',
+      options: { source: 'titleEn' },
+    }),
     defineField({ name: 'excerptEn', title: 'Excerpt (EN)', type: 'text', rows: 3 }),
     defineField({
       name: 'contentEn',

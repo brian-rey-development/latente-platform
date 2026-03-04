@@ -1,19 +1,22 @@
 import type { ArticleCategory } from './types'
 
 export const ARTICLE_CATEGORIES: readonly ArticleCategory[] = [
-  'GEOPOLÍTICA',
   'INTELIGENCIA ARTIFICIAL',
   'BIO-INGENIERÍA',
-  'CULTURA SINTÉTICA',
+  'GEOPOLÍTICA',
   'ECONOMÍA',
+  'INFRAESTRUCTURA',
+  'CULTURA',
 ] as const
 
 export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
-  'GEOPOLÍTICA': 'Geopolítica',
   'INTELIGENCIA ARTIFICIAL': 'Inteligencia Artificial',
   'BIO-INGENIERÍA': 'Bio-Ingeniería',
-  'CULTURA SINTÉTICA': 'Cultura Sintética',
+  'GEOPOLÍTICA': 'Geopolítica',
   'ECONOMÍA': 'Economía',
+  'INFRAESTRUCTURA': 'Infraestructura',
+  'CULTURA': 'Cultura',
 }
 
-export const ALL_CATEGORIES_LABEL = 'TODOS'
+export const ALL_CATEGORIES_LABEL_ES = 'TODOS'
+export const ALL_CATEGORIES_LABEL = ALL_CATEGORIES_LABEL_ES

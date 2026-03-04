@@ -36,6 +36,32 @@ These tokens are the **only** place raw hex values are defined. Everywhere else 
 
 > **Rule:** Never hardcode a hex color inline in a component. If a value isn't in `@theme`, it doesn't belong in the design system — add it there first.
 
+### Context-aware color usage (WCAG contrast)
+
+Color tokens are context-specific. Using the wrong token in the wrong context will silently fail contrast requirements.
+
+| Token | Hex | Background context | WCAG on `bg-ink` | WCAG on `bg-surface` |
+|-------|-----|-------------------|-----------------|---------------------|
+| `text-surface` | #F7F7F5 | **dark only** | 14.9:1 ✅ | — |
+| `text-dim` | #AAAAAA | **dark only** | 5.8:1 ✅ | 2.3:1 ❌ |
+| `text-meta` | #888888 | dark (large text only) | 5.2:1 ✅ | 3.0:1 ❌ |
+| `text-muted` | #555555 | **light only** | 3.0:1 ❌ | 5.6:1 ✅ |
+| `text-ink` | #111111 | **light only** | — | 16.7:1 ✅ |
+
+**Rules:**
+
+- **`bg-ink` / `bg-ink-subtle`** (dark surfaces — footer, hero, nav, overlays):
+  - Primary text → `text-surface`
+  - Secondary / supporting text → `text-dim`
+  - Labels, meta at large size → `text-meta`
+  - **Never use `text-muted` or `text-ink` on dark backgrounds.**
+
+- **`bg-surface` / `bg-surface-dim`** (light surfaces — cards, page body, forms):
+  - Primary text → `text-ink`
+  - Secondary / supporting text → `text-muted`
+  - Labels, meta → `text-meta`
+  - **Never use `text-dim` or `text-surface` on light backgrounds.**
+
 ### Shadow tokens (`globals.css`)
 
 Brutalist shadows are token-driven. Always use the token class; never write `shadow-[...]` with hex.
@@ -72,6 +98,19 @@ All typography is set via font families applied at the layout level:
 | Geist Mono | `--font-geist-mono` | `font-mono` | Body meta, captions, code, badges |
 | Serif (system) | — | `font-serif` | Long-form article body |
 
+### Display text scale
+
+For hero headlines that exceed Tailwind's built-in sizes:
+
+| Token | Size | Usage |
+|-------|------|-------|
+| `text-display-sm` | 4.5rem | Article page title |
+| `text-display-md` | 5.5rem | Article hero headline |
+| `text-display-lg` | 6rem | Store / section headers |
+| `text-display-xl` | 7rem | Manifesto, large hero |
+
+> **Rule:** Use these instead of `text-[N.Nrem]` arbitrary values for headline sizes.
+
 ### Typographic patterns
 
 ```tsx
@@ -82,7 +121,7 @@ All typography is set via font families applied at the layout level:
 <p className="font-serif text-xl leading-[1.8]">
 
 // Label / meta
-<span className="font-mono text-xs font-bold uppercase tracking-widest text-meta">
+<span className="font-mono text-sm font-bold uppercase tracking-widest text-meta">
 ```
 
 ---
@@ -253,7 +292,7 @@ import { FormField } from '@/shared/ui/form-field'
 ```tsx
 // BAD - raw label + input (no FormField)
 <div>
-  <label className="font-mono text-xs font-bold uppercase tracking-widest text-meta block mb-2">
+  <label className="font-mono text-sm font-bold uppercase tracking-widest text-meta block mb-2">
     Email
   </label>
   <input className="w-full border-2 border-ink bg-surface p-4 font-mono text-sm focus:outline-none focus:border-brand" />
@@ -276,7 +315,7 @@ Displays an article category. Stateless, server-renderable.
 import { CategoryBadge } from '@/shared/ui/category-badge'
 
 <CategoryBadge category={article.category} />
-// → <span class="font-mono text-xs font-bold px-3 py-1 uppercase tracking-widest bg-brand text-surface">
+// → <span class="font-mono text-sm font-bold px-3 py-1 uppercase tracking-widest bg-brand text-surface">
 //     INTELIGENCIA ARTIFICIAL
 //   </span>
 ```
@@ -295,7 +334,7 @@ Indicates premium/gated content. Stateless, server-renderable. No props.
 import { PremiumBadge } from '@/shared/ui/premium-badge'
 
 <PremiumBadge />
-// → <span class="inline-flex items-center gap-1.5 font-mono text-xs font-bold px-2 py-1 border border-brand text-brand uppercase tracking-widest">
+// → <span class="inline-flex items-center gap-1.5 font-mono text-sm font-bold px-2 py-1 border border-brand text-brand uppercase tracking-widest">
 //     🔒 CLASIFICADO
 //   </span>
 ```
@@ -318,6 +357,110 @@ import { MarqueeTicker } from '@/shared/ui/marquee-ticker'
 
 ---
 
+### `<ShareModal>`
+
+**File:** `src/shared/ui/share-modal.tsx`
+**Type:** `'use client'`
+
+Props-driven social share modal. Centered brutalist dialog with 4 social buttons (Twitter/X, WhatsApp, LinkedIn, Telegram) and a copy-link button with 2s feedback. Body scroll is locked while open; Escape key closes it.
+
+#### Props
+
+```typescript
+interface ShareModalProps {
+  isOpen: boolean
+  onClose: () => void
+  url: string           // full article URL (window.location.href from parent)
+  articleTitle: string
+  labels: {
+    modalTitle: string
+    twitter: string; whatsapp: string; linkedin: string; telegram: string
+    copyLink: string; copied: string
+  }
+}
+```
+
+#### Behavior
+
+- Backdrop click or Escape key → `onClose()`
+- Social buttons → `window.open(url, '_blank', 'noopener,noreferrer')`
+- Copy link → `navigator.clipboard.writeText(url)` + 2s "copied" visual, timer cleaned up on unmount via `useRef`
+- `document.body.style.overflow` locked while `isOpen`, restored on close/unmount
+
+#### Usage
+
+```tsx
+import { ShareModal } from '@/shared/ui/share-modal'
+
+// Parent manages state
+const [isShareOpen, setIsShareOpen] = useState(false)
+const [url, setUrl] = useState('')
+useEffect(() => { setUrl(window.location.href) }, [])
+
+<button onClick={() => setIsShareOpen(true)}>Share</button>
+<ShareModal
+  isOpen={isShareOpen}
+  onClose={() => setIsShareOpen(false)}
+  url={url}
+  articleTitle={article.title}
+  labels={shareModalLabels}
+/>
+```
+
+#### Anti-patterns
+
+```tsx
+// BAD - calling navigator.share directly (bypasses modal, no social choice)
+await navigator.share({ url })
+
+// BAD - passing window.location.href as default prop (SSR crash)
+// url must be set inside useEffect on the client
+```
+
+---
+
+### `<Toast>`
+
+**File:** `src/shared/ui/toast.tsx`
+
+A fixed-position success notification. Used for clipboard copy confirmation and similar one-shot feedback. The caller manages `visible` state with a timer - no global store needed.
+
+```tsx
+import { Toast } from '@/shared/ui/toast'
+import { useState } from 'react'
+
+const [copied, setCopied] = useState(false)
+
+async function handleCopy() {
+  await navigator.clipboard.writeText(url)
+  setCopied(true)
+  setTimeout(() => setCopied(false), 2000)
+}
+
+<Toast message="Enlace copiado" visible={copied} />
+```
+
+**Props:**
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `message` | `string` | Text to display |
+| `visible` | `boolean` | Whether the toast is shown |
+
+**Design:** Ink background, bone text, monospace, check icon. Slides up via `animate-toast-in`. Respects `prefers-reduced-motion`.
+
+#### Anti-patterns
+
+```tsx
+// BAD - managing toast at global level for simple one-shot feedback
+const { showToast } = useToastContext()
+
+// BAD - using browser alert() for copy confirmation
+alert('Copied!')
+```
+
+---
+
 ## Shared Utilities
 
 ### `formatDate(iso: string): string`
@@ -327,6 +470,17 @@ Converts ISO 8601 datetime to `DD.MM.YYYY` using UTC methods.
 ```ts
 import { formatDate } from '@/shared/lib/format-date'
 formatDate('2025-03-15T10:00:00Z') // → '15.03.2025'
+```
+
+### `formatRelativeDate(iso: string, locale: string): string`
+
+Returns a human-readable relative date string via `Intl.RelativeTimeFormat` (no extra deps). Rounds to the most appropriate unit: days < 7, weeks < 4, months < 12, else years.
+
+```ts
+import { formatRelativeDate } from '@/shared/lib/format-date'
+formatRelativeDate('2026-02-26T00:00:00Z', 'es') // → 'hace 2 días'
+formatRelativeDate('2026-02-27T00:00:00Z', 'en') // → 'yesterday'
+formatRelativeDate('2025-06-01T00:00:00Z', 'es') // → 'hace 9 meses'
 ```
 
 ### `formatPrice(amount: number): string`
@@ -385,6 +539,10 @@ These are patterns the system explicitly prohibits. `/ds-audit` should catch all
 | Inline category span | Use `<CategoryBadge>` | `<CategoryBadge category={...} />` |
 | Inline premium span | Use `<PremiumBadge>` | `<PremiumBadge />` |
 | Inline icon button | Use `<Button variant="icon">` | `<Button variant="icon">` |
+| `text-muted` on `bg-ink` | Contrast 3.0:1 — fails WCAG AA | `text-dim` |
+| `text-ink` on `bg-ink` | Invisible | `text-surface` |
+| `text-surface` on `bg-surface` | Near-invisible | `text-ink` |
+| `text-dim` on `bg-surface` | Contrast 2.3:1 — fails WCAG AA | `text-muted` |
 
 ---
 
@@ -399,6 +557,9 @@ These are patterns the system explicitly prohibits. `/ds-audit` should catch all
 | Article category label | `<CategoryBadge>` |
 | Premium content indicator | `<PremiumBadge>` |
 | Scrolling text banner | `<MarqueeTicker>` |
-| Date string | `formatDate()` |
+| Social share dialog | `<ShareModal>` |
+| Copy/success feedback | `<Toast>` |
+| Date string (absolute) | `formatDate()` |
+| Date string (relative) | `formatRelativeDate()` |
 | Price in USD | `formatPrice()` |
 | Feature toggle | `FEATURE_FLAGS.*` |

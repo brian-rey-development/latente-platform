@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { Search, X } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { X } from 'lucide-react'
+import { strings } from '@/shared/lib/strings'
 import type { ArticlePreview } from '@/modules/articles/domain/types'
 import { useSearch } from '../hooks/use-search'
 import { SearchResultItem } from './search-result-item'
@@ -14,7 +14,6 @@ interface SearchOverlayProps {
 }
 
 export function SearchOverlay({ articles, isOpen, onClose }: SearchOverlayProps) {
-  const t = useTranslations('search')
   const { query, setQuery, results } = useSearch({ articles })
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -39,36 +38,61 @@ export function SearchOverlay({ articles, isOpen, onClose }: SearchOverlayProps)
   if (!isOpen) return null
 
   return (
-    <>
-      <div className="fixed inset-0 bg-black/70 z-40" onClick={onClose} aria-hidden="true" />
+    <div className="fixed inset-0 z-[100] bg-brand animate-search-in flex flex-col">
+      {/* Single container — X button and content share the same grid */}
+      <div className="flex flex-col px-6 md:px-10 max-w-5xl mx-auto w-full pt-6 md:pt-10 flex-1 min-h-0">
 
-      <div className="fixed top-0 left-0 right-0 z-50 bg-ink border-b-2 border-border max-h-[80vh] flex flex-col">
-        <div className="flex items-center gap-4 p-4 border-b border-ink-subtle">
-          <Search size={20} className="text-muted" />
+        {/* Close button */}
+        <div className="flex justify-end mb-8 md:mb-12">
+          <button
+            onClick={onClose}
+            className="text-surface hover:rotate-90 transition-transform duration-200 cursor-pointer"
+            aria-label={strings.search.close}
+          >
+            <X size={48} />
+          </button>
+        </div>
+
+        {/* Label */}
+        <span className="font-mono text-lg md:text-xl font-bold tracking-widest text-surface uppercase mb-4 w-full">
+          {strings.search.label}{' '}
+          <span className="text-brand-muted">{'///'}</span>
+        </span>
+
+        {/* Input */}
+        <div className="w-full border-b-8 border-ink pb-4">
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={t('placeholder')}
-            className="flex-grow bg-transparent font-mono text-lg text-surface focus:outline-none placeholder:text-muted"
+            placeholder={strings.search.placeholder}
+            aria-label={strings.search.placeholder}
+            className="w-full bg-transparent font-sans font-black text-4xl md:text-5xl lg:text-6xl text-surface placeholder:text-surface/40 focus:outline-none uppercase"
           />
-          <button onClick={onClose} className="p-2 text-muted hover:text-surface transition-colors">
-            <X size={24} />
-          </button>
         </div>
 
-        <div className="overflow-y-auto">
+        {/* Screen-reader live region for result count */}
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {query && results.length > 0 ? `${results.length} resultados` : ''}
+        </span>
+
+        {/* Results */}
+        <div
+          className="flex-1 overflow-y-auto mt-6 min-h-0 pb-10"
+          role="list"
+        >
           {query && results.length === 0 && (
-            <p className="font-mono text-sm text-muted uppercase tracking-widest p-8 text-center">
-              {t('noResults', { query })}
+            <p className="font-mono text-sm text-surface/70 uppercase tracking-widest p-8 text-center font-bold">
+              {`Sin resultados para "${query}"`}
             </p>
           )}
           {results.map((article) => (
             <SearchResultItem key={article._id} article={article} onClose={onClose} />
           ))}
         </div>
+
       </div>
-    </>
+    </div>
   )
 }

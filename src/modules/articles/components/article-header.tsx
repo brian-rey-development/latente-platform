@@ -1,59 +1,41 @@
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
-import type { Article } from '../domain/types'
-import { formatDate } from '@/shared/lib/format-date'
-import { CategoryBadge } from '@/shared/ui/category-badge'
-import { PremiumBadge } from '@/shared/ui/premium-badge'
-import { buttonVariants } from '@/shared/ui/button'
-import type { Locale } from '@/i18n/routing'
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import type { Article } from "../domain/types";
+import { CategoryBadge } from "@/shared/ui/category-badge";
+import { PremiumBadge } from "@/shared/ui/premium-badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { strings } from "@/shared/lib/strings";
 
 interface ArticleHeaderProps {
-  readonly article: Article
-  readonly locale: Locale
+  readonly article: Article;
 }
 
-export async function ArticleHeader({ article, locale: _locale }: ArticleHeaderProps) {
-  const t = await getTranslations('article')
-
+export function ArticleHeader({ article }: ArticleHeaderProps) {
   return (
-    <header className="bg-ink text-surface pt-24 md:pt-32 pb-16 border-b-2 border-ink">
-      <div className="w-full flex flex-col lg:flex-row">
-        <div className="hidden lg:flex lg:w-1/4 px-6 md:px-12 justify-start items-start">
-          <Link
-            href="/"
-            className={`${buttonVariants({ variant: 'primary', size: 'md' })} w-max`}
-          >
-            <ArrowLeft size={16} /> {t('back')}
-          </Link>
+    <header className="bg-ink text-surface pt-8 md:pt-12 pb-14 md:pb-20 border-b-2 border-ink">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <Link
+          href="/articulos"
+          className={`${buttonVariants({ variant: "primary", size: "md" })} w-max mb-10 md:mb-14 inline-flex`}
+        >
+          <ArrowLeft size={16} /> {strings.article.back}
+        </Link>
+
+        <div className="flex flex-wrap gap-4 mb-8">
+          {article.categories.map((cat) => (
+            <CategoryBadge key={cat} category={cat} />
+          ))}
+          {article.premium && <PremiumBadge />}
         </div>
 
-        <div className="w-full lg:w-3/4 px-6 md:px-12 lg:px-24">
-          <Link
-            href="/"
-            className={`${buttonVariants({ variant: 'primary', size: 'md' })} lg:hidden w-max mb-12`}
-          >
-            <ArrowLeft size={16} /> {t('back')}
-          </Link>
+        <h1 className="font-sans font-black text-3xl sm:text-5xl md:text-display-sm lg:text-display-md uppercase leading-[0.9] tracking-tighter mb-10 text-surface break-words">
+          {article.title}
+        </h1>
 
-          <div className="flex flex-wrap gap-4 mb-8">
-            <CategoryBadge category={article.category} />
-            {article.premium && <PremiumBadge />}
-            {article.publishedAt && (
-              <span className="font-mono text-xs font-bold uppercase tracking-widest border border-muted text-meta px-3 py-1">
-                {formatDate(article.publishedAt)}
-              </span>
-            )}
-          </div>
-
-          <h1 className="font-sans font-black text-4xl md:text-5xl lg:text-[4.5rem] uppercase leading-[0.95] tracking-tighter mb-8 text-surface">
-            {article.title}
-          </h1>
-          <p className="font-serif text-xl md:text-2xl text-dim max-w-3xl leading-snug border-l-4 border-brand pl-6">
-            {article.excerpt}
-          </p>
-        </div>
+        <p className="font-serif text-xl md:text-2xl text-dim max-w-3xl leading-snug border-l-4 border-brand pl-6">
+          {article.excerpt}
+        </p>
       </div>
     </header>
-  )
+  );
 }

@@ -1,14 +1,13 @@
-import { getTranslations } from 'next-intl/server'
 import { MarqueeTickerClient } from './marquee-ticker-client'
-import type { Locale } from '@/i18n/routing'
+import { ArticleService } from '@/modules/articles/domain/article.service'
+import type { ArticlePreview } from '@/modules/articles/domain/types'
 
 interface MarqueeTickerProps {
-  readonly locale: Locale
+  readonly articles: ArticlePreview[]
 }
 
-export async function MarqueeTicker({ locale: _locale }: MarqueeTickerProps) {
-  const t = await getTranslations('ticker')
-  const items = t.raw('items') as string[]
+export function MarqueeTicker({ articles }: MarqueeTickerProps) {
+  const items = articles.map((a) => ArticleService.resolvePreviewLocale(a).title)
 
   return <MarqueeTickerClient items={items} />
 }

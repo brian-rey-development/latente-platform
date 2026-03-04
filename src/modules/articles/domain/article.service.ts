@@ -1,12 +1,11 @@
 import type { Article, ArticleCategory, ArticlePreview } from './types'
-import type { Locale } from '@/i18n/routing'
 
 export const ArticleService = {
   filterByCategory(
     articles: readonly ArticlePreview[],
     category: ArticleCategory,
   ): ArticlePreview[] {
-    return articles.filter((a) => a.category === category)
+    return articles.filter((a) => a.categories.includes(category))
   },
 
   search(
@@ -23,26 +22,11 @@ export const ArticleService = {
     )
   },
 
-  resolveLocale(article: Article, locale: Locale): Article {
-    if (locale === 'en' && article.titleEn && article.contentEn) {
-      return {
-        ...article,
-        title: article.titleEn,
-        excerpt: article.excerptEn ?? article.excerpt,
-        content: article.contentEn,
-      }
-    }
+  resolveLocale(article: Article): Article {
     return article
   },
 
-  resolvePreviewLocale(article: ArticlePreview, locale: Locale): ArticlePreview {
-    if (locale === 'en' && article.titleEn) {
-      return {
-        ...article,
-        title: article.titleEn,
-        excerpt: article.excerptEn ?? article.excerpt,
-      }
-    }
+  resolvePreviewLocale(article: ArticlePreview): ArticlePreview {
     return article
   },
 } as const

@@ -1,18 +1,20 @@
 import type { PortableTextBlock } from '@portabletext/react'
 
 export type ArticleCategory =
-  | 'GEOPOLÍTICA'
   | 'INTELIGENCIA ARTIFICIAL'
   | 'BIO-INGENIERÍA'
-  | 'CULTURA SINTÉTICA'
+  | 'GEOPOLÍTICA'
   | 'ECONOMÍA'
+  | 'INFRAESTRUCTURA'
+  | 'CULTURA'
 
 export interface ArticlePreview {
   readonly _id: string
   readonly title: string
   readonly titleEn?: string
   readonly slug: string
-  readonly category: ArticleCategory
+  readonly slugEn?: string
+  readonly categories: readonly ArticleCategory[]
   readonly premium: boolean
   readonly excerpt: string
   readonly excerptEn?: string

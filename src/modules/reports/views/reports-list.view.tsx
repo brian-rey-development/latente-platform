@@ -10,10 +10,7 @@ export async function ReportsListView() {
       <ReportsHero count={reports.length} />
       {reports.length === 0 ? (
         <div className="px-6 md:px-10 py-24">
-          <p className="font-mono text-sm font-bold uppercase tracking-widest text-brand mb-4">
-            REPORTES
-          </p>
-          <p className="font-sans font-black text-3xl md:text-4xl uppercase tracking-tight text-dim">
+          <p className="font-sans font-black text-3xl md:text-4xl uppercase tracking-tight text-muted">
             Próximamente.
           </p>
         </div>

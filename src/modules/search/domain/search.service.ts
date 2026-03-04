@@ -12,7 +12,7 @@ export const SearchService = {
         a.title.toLowerCase().includes(q) ||
         a.excerpt.toLowerCase().includes(q) ||
         a.author.toLowerCase().includes(q) ||
-        a.category.toLowerCase().includes(q),
+        a.categories.some((cat) => cat.toLowerCase().includes(q)),
     )
   },
 } as const

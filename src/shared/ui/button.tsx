@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react'
 
-export type ButtonVariant = 'primary' | 'cta' | 'icon'
+export type ButtonVariant = 'primary' | 'cta' | 'icon' | 'brutal'
 export type ButtonSize = 'md' | 'lg'
 
 interface ButtonVariantsOptions {
@@ -13,6 +13,7 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: 'bg-ink text-surface hover:bg-brand',
   cta: 'bg-brand text-surface border-2 border-brand hover:bg-surface hover:text-brand',
   icon: 'bg-ink text-surface p-3 hover:bg-brand shadow-brutal-brand hover:shadow-none hover:translate-x-1 hover:translate-y-1',
+  brutal: 'bg-ink text-surface shadow-brutal-brand hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-[box-shadow,transform]',
 }
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {

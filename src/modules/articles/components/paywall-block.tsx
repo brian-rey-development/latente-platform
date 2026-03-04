@@ -1,26 +1,25 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 import { Lock, Unlock } from 'lucide-react'
 import { Button } from '@/shared/ui/button'
+import { strings } from '@/shared/lib/strings'
 import { useAnalytics } from '@/modules/analytics/hooks/use-analytics'
 import { ANALYTICS_EVENTS } from '@/modules/analytics/domain/constants'
 import type { Article } from '../domain/types'
 
 interface PaywallBlockProps {
-  readonly article: Pick<Article, 'slug' | 'category'>
+  readonly article: Pick<Article, 'slug' | 'categories'>
 }
 
 export function PaywallBlock({ article }: PaywallBlockProps) {
   const router = useRouter()
-  const t = useTranslations('paywall')
   const { track } = useAnalytics()
 
   const handleAuth = () => {
     track(ANALYTICS_EVENTS.PREMIUM_GATE_HIT, {
       slug: article.slug,
-      category: article.category,
+      category: article.categories?.[0],
     })
     router.push('/auth')
   }
@@ -31,14 +30,14 @@ export function PaywallBlock({ article }: PaywallBlockProps) {
         <Lock size={120} className="text-brand" />
       </div>
       <h3 className="font-sans font-black text-4xl md:text-5xl uppercase mb-4 text-brand relative z-10">
-        {t('title')}
+        {strings.paywall.title}
       </h3>
       <p className="font-mono text-lg mb-8 max-w-xl relative z-10">
-        {t('message')}
+        {strings.paywall.message}
       </p>
       <div className="relative z-10">
         <Button variant="cta" onClick={handleAuth}>
-          {t('cta')} <Unlock size={20} />
+          {strings.paywall.cta} <Unlock size={20} />
         </Button>
       </div>
     </div>
