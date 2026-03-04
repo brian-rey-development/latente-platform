@@ -18,5 +18,19 @@ export async function POST(request: Request) {
     revalidatePath(`/articulos/${slug}`)
   }
 
+  if (type === 'report') {
+    revalidatePath('/reportes', 'layout')
+    if (slug) {
+      revalidatePath(`/reportes/${slug}`, 'page')
+    }
+  }
+
+  if (type === 'venture') {
+    revalidatePath('/labs', 'layout')
+    if (slug) {
+      revalidatePath(`/labs/${slug}`, 'page')
+    }
+  }
+
   return Response.json({ revalidated: true, slug, type })
 }

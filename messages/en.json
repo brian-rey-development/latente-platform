@@ -1,6 +1,8 @@
 {
   "nav": {
     "articles": "Articles",
+    "reports": "Reports",
+    "labs": "Labs",
     "store": "Store",
     "manifesto": "Manifesto",
     "access": "Access",
@@ -9,8 +11,41 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "reports": {
+    "title": "REPORTS.",
+    "subtitle": "Deep, documented analysis on the forces reshaping the world.",
+    "label": "LATENTE / REPORTS",
+    "empty": "Coming soon.",
+    "readMore": "Read report"
+  },
+  "labs": {
+    "title": "LATENTE LABS.",
+    "subtitle": "We build Vertical SaaS for industries software has ignored.",
+    "label": "LATENTE / LABS",
+    "empty": "Under construction.",
+    "visitVenture": "Visit"
+  },
   "home": {
     "noArticles": "No published articles."
+  },
+  "articles": {
+    "emptyCategory": "No articles in this category yet.",
+    "emptyCategoryBack": "← All articles"
+  },
+  "emptyState": {
+    "label": "Under construction",
+    "heading": "Hunting ideas.",
+    "quote0Text": "An idea that is not dangerous does not deserve to be called an idea at all.",
+    "quote0Author": "Oscar Wilde",
+    "quote1Text": "Journalism is printing what someone else does not want printed. Everything else is public relations.",
+    "quote1Author": "George Orwell",
+    "quote2Text": "Information is the oil of the 21st century, and analytics is the combustion engine.",
+    "quote2Author": "Peter Sondergaard",
+    "newsletterCta": "Subscribe to receive our first analysis directly in your inbox.",
+    "newsletterPlaceholder": "your@email.com",
+    "newsletterSubmit": "Subscribe",
+    "newsletterSuccess": "Done. We'll notify you when we publish.",
+    "newsletterError": "Something went wrong. Please try again."
   },
   "article": {
     "back": "Back",
@@ -21,8 +56,18 @@
     "end": "End of article.",
     "author": "Author",
     "readTimeLabel": "Reading time",
+    "publishedLabel": "Published",
     "shareLabel": "Share",
     "bookmarkLabel": "Bookmark"
+  },
+  "share": {
+    "modalTitle": "Share article",
+    "twitter": "X / Twitter",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "telegram": "Telegram",
+    "copyLink": "Copy link",
+    "copied": "Link copied"
   },
   "paywall": {
     "title": "SUBSCRIBERS ONLY",
@@ -88,8 +133,10 @@
     "login": "Sign in"
   },
   "search": {
+    "label": "SEARCH",
     "placeholder": "Search articles...",
-    "noResults": "No results for \"{query}\""
+    "noResults": "No results for \"{query}\"",
+    "close": "Close search"
   },
   "newsletter": {
     "heading1": "LATENTE.",
@@ -103,17 +150,25 @@
   "footer": {
     "tagline": "Deep analysis on the forces reshaping the world.",
     "sections": "Sections",
-    "network": "Network",
-    "premium": "Premium Access",
     "rights": "© {year} LATENTE. All rights reserved.",
     "articles": "Articles",
     "store": "Store",
-    "manifesto": "Manifesto"
+    "manifesto": "Manifesto",
+    "access": "Access"
   },
   "ticker": {
     "items": ["GEOPOLITICS", "ARTIFICIAL INTELLIGENCE", "BIO-ENGINEERING", "ECONOMICS"]
   },
   "manifesto": {
+    "titleLine1": "THE",
+    "titleLine2": "MANIFESTO.",
+    "metaDescription": "Latente is a publication that emerges in the space between noise and silence.",
+    "lead": "We are not a media outlet. We are signal for the immediate future.",
+    "body1": "In an era defined by the collapse of shared truth and the exponential acceleration of hardware, traditional analysis has become obsolete. News is noise; code, semiconductors, and genomes are the real signal.",
+    "body2": "was born from a need for intellectual survival. We observe the brutal intersection between Artificial Intelligence, the geopolitics of scarcity, and the rewriting of biology.",
+    "quote": "The visual internet will become a nostalgic museum; the real economy will operate invisibly through submarine cables at the speed of light, between machines that don't need to understand human language.",
+    "body3": "Our promise is simple: Zero friction. Zero advertising. Pure strategic intelligence, delivered without embellishment. We believe in the right to understand the invisible forces packaging the world into silicon architectures.",
+    "protocol": "/// INITIATE PROTOCOL /// VERSION 4.0.1 ///",
     "cta": "Read articles"
   },
   "locale": {

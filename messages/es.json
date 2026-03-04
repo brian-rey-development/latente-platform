@@ -1,6 +1,8 @@
 {
   "nav": {
     "articles": "Artículos",
+    "reports": "Reportes",
+    "labs": "Labs",
     "store": "Tienda",
     "manifesto": "Manifiesto",
     "access": "Acceso",
@@ -9,8 +11,41 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú"
   },
+  "reports": {
+    "title": "REPORTES.",
+    "subtitle": "Análisis profundos y documentados sobre las fuerzas que reconfiguran el mundo.",
+    "label": "LATENTE / REPORTES",
+    "empty": "Próximamente.",
+    "readMore": "Leer reporte"
+  },
+  "labs": {
+    "title": "LATENTE LABS.",
+    "subtitle": "Construimos Vertical SaaS para industrias que el software ha ignorado.",
+    "label": "LATENTE / LABS",
+    "empty": "En construcción.",
+    "visitVenture": "Visitar"
+  },
   "home": {
     "noArticles": "Sin artículos publicados."
+  },
+  "articles": {
+    "emptyCategory": "Sin artículos en esta categoría aún.",
+    "emptyCategoryBack": "← Todos los artículos"
+  },
+  "emptyState": {
+    "label": "En construcción",
+    "heading": "Cazando ideas.",
+    "quote0Text": "Una idea que no es peligrosa no merece llamarse idea.",
+    "quote0Author": "Oscar Wilde",
+    "quote1Text": "El periodismo es publicar lo que alguien no quiere que publiques. Todo lo demás son relaciones públicas.",
+    "quote1Author": "George Orwell",
+    "quote2Text": "La información es el petróleo del siglo XXI, y el análisis es el motor de combustión.",
+    "quote2Author": "Peter Sondergaard",
+    "newsletterCta": "Suscríbete para recibir el primer análisis directamente en tu inbox.",
+    "newsletterPlaceholder": "tu@email.com",
+    "newsletterSubmit": "Suscribirse",
+    "newsletterSuccess": "Listo. Te avisamos cuando publiquemos.",
+    "newsletterError": "Algo salió mal. Intenta de nuevo."
   },
   "article": {
     "back": "Volver",
@@ -21,8 +56,18 @@
     "end": "Fin del artículo.",
     "author": "Autor",
     "readTimeLabel": "Tiempo de lectura",
+    "publishedLabel": "Publicado",
     "shareLabel": "Compartir",
     "bookmarkLabel": "Guardar"
+  },
+  "share": {
+    "modalTitle": "Compartir artículo",
+    "twitter": "X / Twitter",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "telegram": "Telegram",
+    "copyLink": "Copiar enlace",
+    "copied": "Enlace copiado"
   },
   "paywall": {
     "title": "SÓLO PARA SUSCRIPTORES",
@@ -88,8 +133,10 @@
     "login": "Iniciar sesión"
   },
   "search": {
+    "label": "BUSCAR",
     "placeholder": "Buscar artículos...",
-    "noResults": "Sin resultados para \"{query}\""
+    "noResults": "Sin resultados para \"{query}\"",
+    "close": "Cerrar búsqueda"
   },
   "newsletter": {
     "heading1": "LATENTE.",
@@ -103,17 +150,25 @@
   "footer": {
     "tagline": "Análisis profundo sobre las fuerzas que reconfiguran el mundo.",
     "sections": "Secciones",
-    "network": "Red",
-    "premium": "Acceso Premium",
     "rights": "© {year} LATENTE. Todos los derechos reservados.",
     "articles": "Artículos",
     "store": "Tienda",
-    "manifesto": "Manifiesto"
+    "manifesto": "Manifiesto",
+    "access": "Acceso"
   },
   "ticker": {
     "items": ["GEOPOLÍTICA", "INTELIGENCIA ARTIFICIAL", "BIO-INGENIERÍA", "ECONOMÍA"]
   },
   "manifesto": {
+    "titleLine1": "EL",
+    "titleLine2": "MANIFIESTO.",
+    "metaDescription": "Latente es una publicación que emerge en el espacio entre el ruido y el silencio.",
+    "lead": "No somos un medio de comunicación. Somos señal para el futuro inmediato.",
+    "body1": "En una era definida por el colapso de la verdad compartida y la aceleración exponencial del hardware, el análisis tradicional ha quedado obsoleto. Las noticias son ruido; el código, los semiconductores y los genomas son la señal real.",
+    "body2": "nace de una necesidad de supervivencia intelectual. Observamos la intersección brutal entre la Inteligencia Artificial, la geopolítica de escasez y la reescritura de la biología.",
+    "quote": "El internet visual se convertirá en un museo nostálgico; la verdadera economía operará invisiblemente a través de cables submarinos a la velocidad de la luz, entre máquinas que no necesitan comprender el lenguaje humano.",
+    "body3": "Nuestra promesa es simple: Cero fricción. Cero publicidad. Inteligencia estratégica pura, entregada sin adornos. Creemos en el derecho a entender las fuerzas invisibles que están empaquetando el mundo en arquitecturas de silicio.",
+    "protocol": "/// INICIAR PROTOCOLO /// VERSIÓN 4.0.1 ///",
     "cta": "Leer artículos"
   },
   "locale": {
