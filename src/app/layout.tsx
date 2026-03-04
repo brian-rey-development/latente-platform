@@ -1,5 +1,5 @@
+import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { headers } from 'next/headers'
 import './globals.css'
 
 const geistSans = Geist({
@@ -12,12 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export default async function RootLayout({ children }: { readonly children: React.ReactNode }) {
-  const headersList = await headers()
-  const locale = headersList.get('x-next-intl-locale') ?? 'es'
+export const metadata: Metadata = {
+  metadataBase: new URL('https://latente.xyz'),
+  title: { default: 'LATENTE.', template: '%s | LATENTE.' },
+}
 
+export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
   return (
-    <html lang={locale}>
+    <html>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
