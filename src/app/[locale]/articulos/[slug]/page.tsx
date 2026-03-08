@@ -5,8 +5,7 @@ import { getArticleSlugsEnQuery } from '@/modules/articles/application/queries/g
 import { ArticleDetailView } from '@/modules/articles/views/article-detail.view'
 import { urlFor } from '@/sanity/image'
 import type { Locale } from '@/i18n/routing'
-
-const BASE_URL = 'https://latente.xyz'
+import { SITE_URL } from '@/shared/lib/site-config'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -41,8 +40,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const canonical =
     locale === 'es'
-      ? `${BASE_URL}/articulos/${slug}`
-      : `${BASE_URL}/en/articulos/${slug}`
+      ? `${SITE_URL}/articulos/${slug}`
+      : `${SITE_URL}/en/articulos/${slug}`
 
   const hasBothLocales = Boolean(article.titleEn && article.contentEn)
 
@@ -67,8 +66,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical,
       ...(hasBothLocales && {
         languages: {
-          es: `${BASE_URL}/articulos/${slug}`,
-          en: `${BASE_URL}/en/articulos/${slug}`,
+          es: `${SITE_URL}/articulos/${slug}`,
+          en: `${SITE_URL}/en/articulos/${slug}`,
         },
       }),
     },

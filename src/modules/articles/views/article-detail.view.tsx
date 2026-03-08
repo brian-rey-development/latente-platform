@@ -9,12 +9,15 @@ import { PaywallBlock } from '../components/paywall-block'
 import { ReadTracker } from '../components/read-tracker'
 import { urlFor } from '@/sanity/image'
 import { FEATURE_FLAGS } from '@/shared/lib/feature-flags'
+import { SITE_URL, SITE_NAME } from '@/shared/lib/site-config'
+import type { Locale } from '@/i18n/routing'
 
 interface ArticleDetailViewProps {
   readonly slug: string
+  readonly locale: Locale
 }
 
-export async function ArticleDetailView({ slug }: ArticleDetailViewProps) {
+export async function ArticleDetailView({ slug, locale }: ArticleDetailViewProps) {
   const rawArticle = await getArticleQuery(slug)
 
   if (!rawArticle) {
@@ -27,9 +30,13 @@ export async function ArticleDetailView({ slug }: ArticleDetailViewProps) {
     ? urlFor(article.coverImage).width(1600).height(900).url()
     : null
 
+  const articleUrl =
+    locale === 'es' ? `${SITE_URL}/articulos/${slug}` : `${SITE_URL}/en/articulos/${slug}`
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    url: articleUrl,
     headline: article.title,
     description: article.excerpt,
     author: { '@type': 'Person', name: article.author },
@@ -37,8 +44,8 @@ export async function ArticleDetailView({ slug }: ArticleDetailViewProps) {
     image: coverSrc ?? undefined,
     publisher: {
       '@type': 'Organization',
-      name: 'LATENTE',
-      url: 'https://latente.xyz',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   }
 

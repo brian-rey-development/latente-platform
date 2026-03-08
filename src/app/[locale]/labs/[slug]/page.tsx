@@ -3,8 +3,7 @@ import { getVentureQuery } from '@/modules/labs/application/queries/get-venture.
 import { getVentureSlugsQuery } from '@/modules/labs/application/queries/get-venture-slugs.query'
 import { VentureDetailView } from '@/modules/labs/views/venture-detail.view'
 import { urlFor } from '@/sanity/image'
-
-const BASE_URL = 'https://latente.xyz'
+import { SITE_URL } from '@/shared/lib/site-config'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -24,20 +23,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!venture) return {}
 
-  const title = locale === 'en' && venture.taglineEn
-    ? `${venture.name} — ${venture.taglineEn}`
-    : `${venture.name} — ${venture.tagline}`
+  const title =
+    locale === 'en' && venture.taglineEn
+      ? `${venture.name} - ${venture.taglineEn}`
+      : `${venture.name} - ${venture.tagline}`
 
-  const description = locale === 'en' && venture.descriptionEn
-    ? venture.descriptionEn
-    : venture.description
+  const description =
+    locale === 'en' && venture.descriptionEn ? venture.descriptionEn : venture.description
 
   const ogImage = venture.logo
     ? urlFor(venture.logo).width(1200).height(630).url()
     : undefined
 
   const canonical =
-    locale === 'es' ? `${BASE_URL}/labs/${slug}` : `${BASE_URL}/en/labs/${slug}`
+    locale === 'es' ? `${SITE_URL}/labs/${slug}` : `${SITE_URL}/en/labs/${slug}`
+
+  const hasBothLocales = Boolean(venture.taglineEn && venture.descriptionEn)
 
   return {
     title,
@@ -53,7 +54,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       images: ogImage ? [ogImage] : [],
     },
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      ...(hasBothLocales && {
+        languages: {
+          es: `${SITE_URL}/labs/${slug}`,
+          en: `${SITE_URL}/en/labs/${slug}`,
+        },
+      }),
+    },
   }
 }
 

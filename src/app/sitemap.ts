@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getArticleSlugsQuery } from '@/modules/articles/application/queries/get-article-slugs.query'
 import { getArticleSlugsEnQuery } from '@/modules/articles/application/queries/get-article-slugs-en.query'
-
-const BASE_URL = 'https://latente.xyz'
+import { SITE_URL } from '@/shared/lib/site-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [esSlugs, enSlugs] = await Promise.all([
@@ -13,46 +12,134 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const enSlugSet = new Set(enSlugs)
 
   const esArticleRoutes: MetadataRoute.Sitemap = esSlugs.map((slug) => ({
-    url: `${BASE_URL}/articulos/${slug}`,
+    url: `${SITE_URL}/articulos/${slug}`,
     changeFrequency: 'weekly',
     priority: 0.8,
     ...(enSlugSet.has(slug) && {
       alternates: {
         languages: {
-          es: `${BASE_URL}/articulos/${slug}`,
-          en: `${BASE_URL}/en/articulos/${slug}`,
+          es: `${SITE_URL}/articulos/${slug}`,
+          en: `${SITE_URL}/en/articulos/${slug}`,
         },
       },
     }),
   }))
 
   const enArticleRoutes: MetadataRoute.Sitemap = enSlugs.map((slug) => ({
-    url: `${BASE_URL}/en/articulos/${slug}`,
+    url: `${SITE_URL}/en/articulos/${slug}`,
     changeFrequency: 'weekly',
     priority: 0.8,
     alternates: {
       languages: {
-        es: `${BASE_URL}/articulos/${slug}`,
-        en: `${BASE_URL}/en/articulos/${slug}`,
+        es: `${SITE_URL}/articulos/${slug}`,
+        en: `${SITE_URL}/en/articulos/${slug}`,
       },
     },
   }))
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: BASE_URL,
+      url: SITE_URL,
       changeFrequency: 'daily',
       priority: 1.0,
-      alternates: { languages: { es: BASE_URL, en: `${BASE_URL}/en` } },
+      alternates: { languages: { es: SITE_URL, en: `${SITE_URL}/en` } },
     },
     {
-      url: `${BASE_URL}/en`,
+      url: `${SITE_URL}/en`,
       changeFrequency: 'daily',
       priority: 1.0,
-      alternates: { languages: { es: BASE_URL, en: `${BASE_URL}/en` } },
+      alternates: { languages: { es: SITE_URL, en: `${SITE_URL}/en` } },
     },
-    { url: `${BASE_URL}/tienda`, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${BASE_URL}/manifiesto`, changeFrequency: 'monthly', priority: 0.5 },
+    {
+      url: `${SITE_URL}/articulos`,
+      changeFrequency: 'daily',
+      priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/articulos`,
+          en: `${SITE_URL}/en/articulos`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/en/articulos`,
+      changeFrequency: 'daily',
+      priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/articulos`,
+          en: `${SITE_URL}/en/articulos`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/reportes`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/reportes`,
+          en: `${SITE_URL}/en/reportes`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/en/reportes`,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/reportes`,
+          en: `${SITE_URL}/en/reportes`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/labs`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/labs`,
+          en: `${SITE_URL}/en/labs`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/en/labs`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/labs`,
+          en: `${SITE_URL}/en/labs`,
+        },
+      },
+    },
+    { url: `${SITE_URL}/tienda`, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${SITE_URL}/en/tienda`, changeFrequency: 'weekly', priority: 0.7 },
+    {
+      url: `${SITE_URL}/manifiesto`,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/manifiesto`,
+          en: `${SITE_URL}/en/manifiesto`,
+        },
+      },
+    },
+    {
+      url: `${SITE_URL}/en/manifiesto`,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/manifiesto`,
+          en: `${SITE_URL}/en/manifiesto`,
+        },
+      },
+    },
   ]
 
   return [...staticRoutes, ...esArticleRoutes, ...enArticleRoutes]

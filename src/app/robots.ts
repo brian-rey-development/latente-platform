@@ -1,12 +1,20 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/shared/lib/site-config'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/studio/', '/api/'],
+      disallow: [
+        '/studio/',
+        '/api/',
+        '/auth/',
+        '/en/auth/',
+        '/tienda/checkout/',
+        '/en/tienda/checkout/',
+      ],
     },
-    sitemap: 'https://latente.xyz/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

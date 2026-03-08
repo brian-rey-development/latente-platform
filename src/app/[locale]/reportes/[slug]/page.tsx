@@ -3,8 +3,7 @@ import { getReportQuery } from '@/modules/reports/application/queries/get-report
 import { getReportSlugsQuery } from '@/modules/reports/application/queries/get-report-slugs.query'
 import { ReportDetailView } from '@/modules/reports/views/report-detail.view'
 import { urlFor } from '@/sanity/image'
-
-const BASE_URL = 'https://latente.xyz'
+import { SITE_URL } from '@/shared/lib/site-config'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -33,7 +32,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : undefined
 
   const canonical =
-    locale === 'es' ? `${BASE_URL}/reportes/${slug}` : `${BASE_URL}/en/reportes/${slug}`
+    locale === 'es' ? `${SITE_URL}/reportes/${slug}` : `${SITE_URL}/en/reportes/${slug}`
+
+  const hasBothLocales = Boolean(report.titleEn && report.excerptEn)
 
   return {
     title,
@@ -52,7 +53,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       images: ogImage ? [ogImage] : [],
     },
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      ...(hasBothLocales && {
+        languages: {
+          es: `${SITE_URL}/reportes/${slug}`,
+          en: `${SITE_URL}/en/reportes/${slug}`,
+        },
+      }),
+    },
   }
 }
 
