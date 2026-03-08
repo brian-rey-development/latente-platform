@@ -29,6 +29,7 @@ next-env.d.ts
 # debug
 npm-debug.log*
 pnpm-debug.log*
+firebase-debug.log*
 
 # claude code - machine-specific session data
 .claude/
