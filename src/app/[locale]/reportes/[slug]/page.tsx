@@ -11,11 +11,10 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const slugs = await getReportSlugsQuery().catch(() => [] as string[])
-  const params = slugs.flatMap((slug) => [
+  return slugs.flatMap((slug) => [
     { locale: 'es', slug },
     { locale: 'en', slug },
   ])
-  return params
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

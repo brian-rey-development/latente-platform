@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: LabsPageProps): Promise<Metad
   const { locale } = await params
   const canonical = locale === 'es' ? `${SITE_URL}/labs` : `${SITE_URL}/en/labs`
 
-  const title = locale === 'es' ? 'Labs' : 'Labs'
+  const title = 'Labs'
   const description =
     locale === 'es'
       ? 'Proyectos experimentales y ventures del ecosistema Latente.'

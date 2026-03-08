@@ -118,28 +118,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     { url: `${SITE_URL}/tienda`, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/en/tienda`, changeFrequency: 'weekly', priority: 0.7 },
-    {
-      url: `${SITE_URL}/manifiesto`,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-      alternates: {
-        languages: {
-          es: `${SITE_URL}/manifiesto`,
-          en: `${SITE_URL}/en/manifiesto`,
-        },
-      },
-    },
-    {
-      url: `${SITE_URL}/en/manifiesto`,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-      alternates: {
-        languages: {
-          es: `${SITE_URL}/manifiesto`,
-          en: `${SITE_URL}/en/manifiesto`,
-        },
-      },
-    },
   ]
 
   return [...staticRoutes, ...esArticleRoutes, ...enArticleRoutes]

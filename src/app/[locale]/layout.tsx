@@ -12,6 +12,7 @@ import { CartOverlay } from '@/modules/cart/components/cart-overlay'
 import { AnalyticsProvider } from '@/modules/analytics/infrastructure/posthog.provider'
 import { listArticlesQuery } from '@/modules/articles/application/queries/list-articles.query'
 import type { Locale } from '@/i18n/routing'
+import { SITE_NAME } from '@/shared/lib/site-config'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   return {
     description,
     openGraph: {
-      siteName: 'LATENTE.',
+      siteName: SITE_NAME,
       locale: locale === 'es' ? 'es_MX' : 'en_US',
       alternateLocale: locale === 'es' ? ['en_US'] : ['es_MX'],
       type: 'website',
