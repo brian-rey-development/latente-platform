@@ -45,14 +45,19 @@ type ArticleCategory =
   | 'ECONOMÍA'
 
 interface ArticlePreview {
-  _id: string; slug: string; title: string; excerpt: string
-  category: ArticleCategory; premium: boolean; author: string
+  _id: string; slug: string; slugEn?: string
+  title: string; titleEn?: string
+  subtitle?: string; subtitleEn?: string
+  excerpt: string; excerptEn?: string
+  categories: ArticleCategory[]; premium: boolean; author: string
   publishedAt: string; readTimeMinutes: number
   coverImage?: SanityImageRef
 }
 
 interface Article extends ArticlePreview {
   content: PortableTextBlock[]
+  contentEn?: PortableTextBlock[]
+  sources?: string[]
 }
 ```
 

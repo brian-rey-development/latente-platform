@@ -58,7 +58,7 @@ export async function ArticleDetailView({ slug, locale }: ArticleDetailViewProps
 
       <ReadTracker article={article} />
 
-      <ArticleHeader article={article} />
+      <ArticleHeader article={article} locale={locale} />
 
       {coverSrc && (
         <div className="w-full h-[40vh] md:h-[60vh] bg-ink border-b-2 border-ink relative">

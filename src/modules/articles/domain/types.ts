@@ -12,6 +12,8 @@ export interface ArticlePreview {
   readonly _id: string
   readonly title: string
   readonly titleEn?: string
+  readonly subtitle?: string
+  readonly subtitleEn?: string
   readonly slug: string
   readonly slugEn?: string
   readonly categories: readonly ArticleCategory[]
@@ -27,6 +29,7 @@ export interface ArticlePreview {
 export interface Article extends ArticlePreview {
   readonly content: PortableTextBlock[]
   readonly contentEn?: PortableTextBlock[]
+  readonly sources?: readonly string[]
 }
 
 // Minimal Sanity image reference shape

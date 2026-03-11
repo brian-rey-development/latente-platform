@@ -6,6 +6,7 @@ import { ArticleGrid } from "../components/article-grid";
 import { EmptyArticles } from "../components/empty-articles";
 import { MarqueeTicker } from "@/shared/ui/marquee-ticker";
 import { strings } from "@/shared/lib/strings";
+import { SignalsFeedView } from "@/modules/signals/views/signals-feed.view";
 import type { ArticleCategory } from "../domain/types";
 
 interface ArticlesListViewProps {
@@ -46,7 +47,14 @@ export async function ArticlesListView({ category }: ArticlesListViewProps) {
 
   return (
     <div>
-      <ArticleHero article={filtered[0]} />
+      <div className="grid grid-cols-1 lg:grid-cols-12">
+        <div className="lg:col-span-8">
+          <ArticleHero article={filtered[0]} />
+        </div>
+        <div className="lg:col-span-4 lg:border-l-2 border-ink border-b-2">
+          <SignalsFeedView />
+        </div>
+      </div>
       <MarqueeTicker articles={articles} />
       <ArticleGrid articles={filtered.slice(1)} />
     </div>

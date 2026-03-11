@@ -1,16 +1,19 @@
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Article } from "../domain/types";
 import { CategoryBadge } from "@/shared/ui/category-badge";
 import { PremiumBadge } from "@/shared/ui/premium-badge";
 import { buttonVariants } from "@/shared/ui/button";
-import { strings } from "@/shared/lib/strings";
 
 interface ArticleHeaderProps {
   readonly article: Article;
+  readonly locale?: string;
 }
 
-export function ArticleHeader({ article }: ArticleHeaderProps) {
+export async function ArticleHeader({ article, locale }: ArticleHeaderProps) {
+  const t = await getTranslations("article");
+
   return (
     <header className="bg-ink text-surface pt-8 md:pt-12 pb-14 md:pb-20 border-b-2 border-ink">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
@@ -18,12 +21,12 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           href="/articulos"
           className={`${buttonVariants({ variant: "primary", size: "md" })} w-max mb-10 md:mb-14 inline-flex`}
         >
-          <ArrowLeft size={16} /> {strings.article.back}
+          <ArrowLeft size={16} /> {t("back")}
         </Link>
 
         <div className="flex flex-wrap gap-4 mb-8">
           {article.categories.map((cat) => (
-            <CategoryBadge key={cat} category={cat} />
+            <CategoryBadge key={cat} category={cat} locale={locale} />
           ))}
           {article.premium && <PremiumBadge />}
         </div>

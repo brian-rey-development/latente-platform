@@ -1,6 +1,7 @@
 {
   "nav": {
     "articles": "Articles",
+    "signals": "Signals",
     "reports": "Reports",
     "labs": "Labs",
     "store": "Store",
@@ -26,7 +27,14 @@
     "visitVenture": "Visit"
   },
   "home": {
-    "noArticles": "No published articles."
+    "noArticles": "No published articles.",
+    "featured": "Featured"
+  },
+  "signals": {
+    "heading": "Signals",
+    "sub": "Quick analysis",
+    "viewAll": "See all",
+    "soon": "Coming soon"
   },
   "articles": {
     "emptyCategory": "No articles in this category yet.",

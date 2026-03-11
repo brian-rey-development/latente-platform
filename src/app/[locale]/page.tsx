@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
-import { ArticlesListView } from '@/modules/articles/views/articles-list.view'
-import type { ArticleCategory } from '@/modules/articles/domain/types'
-import { ARTICLE_CATEGORIES } from '@/modules/articles/domain/constants'
+import { HomeView } from '@/modules/articles/views/home.view'
 import { SITE_URL } from '@/shared/lib/site-config'
 
 interface HomePageProps {
   readonly params: Promise<{ locale: string }>
-  readonly searchParams: Promise<{ cat?: string }>
 }
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
@@ -21,12 +18,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   }
 }
 
-export default async function HomePage({ params, searchParams }: HomePageProps) {
-  const [, { cat }] = await Promise.all([params, searchParams])
-
-  const category = ARTICLE_CATEGORIES.includes(cat as ArticleCategory)
-    ? (cat as ArticleCategory)
-    : undefined
-
-  return <ArticlesListView category={category} />
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params
+  return <HomeView locale={locale} />
 }

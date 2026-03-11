@@ -3,22 +3,23 @@ import { listArticlesQuery } from "../application/queries/list-articles.query";
 import { ArticleService } from "../domain/article.service";
 import { ArticleGrid } from "../components/article-grid";
 import { EmptyArticles } from "../components/empty-articles";
-import { ALL_CATEGORIES_LABEL_ES } from "../domain/constants";
+import { ALL_CATEGORIES_LABEL_ES, translateCategory } from "../domain/constants";
 import { strings } from "@/shared/lib/strings";
 import type { ArticleCategory } from "../domain/types";
 
 interface ArticlesArchiveViewProps {
   readonly category?: ArticleCategory;
+  readonly locale?: string;
 }
 
-export async function ArticlesArchiveView({ category }: ArticlesArchiveViewProps) {
+export async function ArticlesArchiveView({ category, locale }: ArticlesArchiveViewProps) {
   const articles = await listArticlesQuery();
 
   const filtered = category
     ? ArticleService.filterByCategory(articles, category)
     : articles;
 
-  const heading = category ?? ALL_CATEGORIES_LABEL_ES;
+  const heading = category ? translateCategory(category, locale) : ALL_CATEGORIES_LABEL_ES;
 
   if (filtered.length === 0) {
     if (category) {
@@ -34,7 +35,7 @@ export async function ArticlesArchiveView({ category }: ArticlesArchiveViewProps
           </div>
           <div className="px-6 md:px-10 pt-16 pb-32">
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-brand mb-6">
-              {heading}
+              {category ? translateCategory(category, locale) : ALL_CATEGORIES_LABEL_ES}
             </p>
             <p className="font-sans font-black text-4xl md:text-6xl uppercase tracking-tight text-ink leading-[1.05]">
               {strings.articles.emptyCategory}
@@ -57,7 +58,7 @@ export async function ArticlesArchiveView({ category }: ArticlesArchiveViewProps
           {filtered.length}
         </span>
       </div>
-      <ArticleGrid articles={filtered} />
+      <ArticleGrid articles={filtered} locale={locale} />
     </div>
   );
 }

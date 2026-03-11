@@ -1,8 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { ArrowUpRight } from "lucide-react";
 import type { ArticlePreview } from "../domain/types";
 import { ArticleService } from "../domain/article.service";
+import { translateCategory } from "../domain/constants";
 import { formatDate } from "@/shared/lib/format-date";
 import { urlFor } from "@/sanity/image";
 import { PremiumBadge } from "@/shared/ui/premium-badge";
@@ -10,10 +11,11 @@ import { PremiumBadge } from "@/shared/ui/premium-badge";
 interface ArticleCardProps {
   readonly article: ArticlePreview;
   readonly index: number;
+  readonly locale?: string;
 }
 
-export function ArticleCard({ article, index }: ArticleCardProps) {
-  const resolved = ArticleService.resolvePreviewLocale(article);
+export function ArticleCard({ article, index, locale }: ArticleCardProps) {
+  const resolved = ArticleService.resolvePreviewLocale(article, locale);
 
   const coverSrc = resolved.coverImage
     ? urlFor(resolved.coverImage).width(800).height(600).url()
@@ -49,7 +51,7 @@ export function ArticleCard({ article, index }: ArticleCardProps) {
 
       <div className="p-5 md:p-8 flex flex-col grow">
         <span className="font-mono text-sm font-bold tracking-widest text-brand uppercase mb-4 block">
-          {resolved.categories.join(" / ")}
+          {resolved.categories.map((c) => translateCategory(c, locale)).join(" / ")}
         </span>
         <h3 className="font-sans font-black text-3xl leading-[1.1] mb-4 uppercase group-hover:text-surface">
           {resolved.title}

@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 const CATEGORY_OPTIONS = [
   { title: 'Inteligencia Artificial', value: 'INTELIGENCIA ARTIFICIAL' },
@@ -9,9 +9,9 @@ const CATEGORY_OPTIONS = [
   { title: 'Cultura', value: 'CULTURA' },
 ]
 
-export const articleSchema = defineType({
-  name: 'article',
-  title: 'Artículo',
+export const signalSchema = defineType({
+  name: 'signal',
+  title: 'Señal',
   type: 'document',
   fields: [
     defineField({
@@ -21,12 +21,6 @@ export const articleSchema = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'subtitle',
-      title: 'Subtítulo',
-      type: 'string',
-      description: 'Subtítulo o deck del artículo (opcional)',
-    }),
-    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -34,12 +28,11 @@ export const articleSchema = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'categories',
-      title: 'Categorías',
-      type: 'array',
-      of: [defineArrayMember({ type: 'string' })],
+      name: 'category',
+      title: 'Categoría',
+      type: 'string',
       options: { list: CATEGORY_OPTIONS },
-      validation: (r) => r.required().min(1),
+      validation: (r) => r.required(),
     }),
     defineField({
       name: 'premium',
@@ -64,29 +57,19 @@ export const articleSchema = defineType({
       name: 'publishedAt',
       title: 'Publicado el',
       type: 'datetime',
-    }),
-    defineField({
-      name: 'readTimeMinutes',
-      title: 'Tiempo de lectura (minutos)',
-      type: 'number',
-    }),
-    defineField({
-      name: 'coverImage',
-      title: 'Imagen de portada',
-      type: 'image',
-      options: { hotspot: true },
+      validation: (r) => r.required(),
     }),
     defineField({
       name: 'content',
       title: 'Contenido',
       type: 'array',
-      of: [defineArrayMember({ type: 'block' })],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'sources',
-      title: 'Fuentes',
+      title: 'Fuentes (ES)',
       type: 'array',
-      of: [defineArrayMember({ type: 'url' })],
+      of: [{ type: 'string' }],
     }),
     defineField({ name: 'titleEn', title: 'Title (EN)', type: 'string' }),
     defineField({
@@ -95,13 +78,18 @@ export const articleSchema = defineType({
       type: 'slug',
       options: { source: 'titleEn' },
     }),
-    defineField({ name: 'subtitleEn', title: 'Subtitle (EN)', type: 'string' }),
     defineField({ name: 'excerptEn', title: 'Excerpt (EN)', type: 'text', rows: 3 }),
     defineField({
       name: 'contentEn',
       title: 'Content (EN)',
       type: 'array',
-      of: [defineArrayMember({ type: 'block' })],
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'sourcesEn',
+      title: 'Sources (EN)',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
   ],
   orderings: [

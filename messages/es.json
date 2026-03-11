@@ -1,6 +1,7 @@
 {
   "nav": {
     "articles": "Artículos",
+    "signals": "Señales",
     "reports": "Reportes",
     "labs": "Labs",
     "store": "Tienda",
@@ -26,7 +27,14 @@
     "visitVenture": "Visitar"
   },
   "home": {
-    "noArticles": "Sin artículos publicados."
+    "noArticles": "Sin artículos publicados.",
+    "featured": "Destacados"
+  },
+  "signals": {
+    "heading": "Señales",
+    "sub": "Análisis rápido",
+    "viewAll": "Ver todas",
+    "soon": "Próximamente"
   },
   "articles": {
     "emptyCategory": "Sin artículos en esta categoría aún.",

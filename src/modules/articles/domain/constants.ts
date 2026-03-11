@@ -20,3 +20,16 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
 
 export const ALL_CATEGORIES_LABEL_ES = 'TODOS'
 export const ALL_CATEGORIES_LABEL = ALL_CATEGORIES_LABEL_ES
+
+export const CATEGORY_EN: Record<ArticleCategory, string> = {
+  'INTELIGENCIA ARTIFICIAL': 'ARTIFICIAL INTELLIGENCE',
+  'BIO-INGENIERÍA': 'BIOENGINEERING',
+  'GEOPOLÍTICA': 'GEOPOLITICS',
+  'ECONOMÍA': 'ECONOMICS',
+  'INFRAESTRUCTURA': 'INFRASTRUCTURE',
+  'CULTURA': 'CULTURE',
+}
+
+export function translateCategory(category: ArticleCategory, locale?: string): string {
+  return locale === 'en' ? (CATEGORY_EN[category] ?? category) : category
+}

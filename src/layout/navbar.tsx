@@ -1,20 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ShoppingCart, Search, Menu, X } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useCart } from "@/modules/cart/hooks/use-cart";
 import { SearchOverlay } from "@/modules/search/components/search-overlay";
 import { CategoryBar } from "@/layout/category-bar";
 import { FEATURE_FLAGS } from "@/shared/lib/feature-flags";
-import { strings } from "@/shared/lib/strings";
 import type { ArticlePreview } from "@/modules/articles/domain/types";
 
 const NAV_LINKS = [
-  { href: "/articulos", label: "ARTÍCULOS", match: "/articulos" },
-  { href: "/reportes", label: "REPORTES", match: "/reportes" },
-  { href: "/labs", label: "LABS", match: "/labs" },
+  { href: "/articulos", key: "articles", match: "/articulos" },
+  { href: "/senales", key: "signals", match: "/senales" },
 ] as const;
 
 interface NavbarProps {
@@ -27,6 +25,9 @@ export function Navbar({ articles = [] }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openCart, itemCount } = useCart();
   const pathname = usePathname();
+  const locale = useLocale();
+  const isEnglish = locale === "en";
+  const t = useTranslations("nav");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -54,7 +55,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
 
           {/* Desktop section nav */}
           <nav className="hidden md:flex items-center gap-6 ml-8" aria-label="Secciones">
-            {NAV_LINKS.map(({ href, label, match }) => {
+            {NAV_LINKS.map(({ href, key, match }) => {
               const isActive = pathname.includes(match);
               return (
                 <Link
@@ -63,7 +64,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
                   className={`font-mono text-sm font-bold uppercase tracking-widest transition-colors
                     ${isActive ? "text-brand underline underline-offset-4 decoration-2" : "text-ink hover:text-brand"}`}
                 >
-                  {label}
+                  {t(key)}
                 </Link>
               );
             })}
@@ -71,10 +72,30 @@ export function Navbar({ articles = [] }: NavbarProps) {
 
           {/* Actions */}
           <div className="flex items-center gap-3 ml-auto">
+            {/* Language switcher */}
+            <div className="hidden md:flex items-center border-2 border-ink overflow-hidden">
+              <Link
+                href={pathname}
+                locale="es"
+                className={`px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-widest transition-colors
+                  ${!isEnglish ? "bg-ink text-surface" : "text-ink hover:text-brand"}`}
+              >
+                ES
+              </Link>
+              <Link
+                href={pathname}
+                locale="en"
+                className={`px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-widest transition-colors border-l-2 border-ink
+                  ${isEnglish ? "bg-ink text-surface" : "text-ink hover:text-brand"}`}
+              >
+                EN
+              </Link>
+            </div>
+
             <button
               onClick={() => setSearchOpen(true)}
               className="p-2 hover:text-brand transition-colors"
-              aria-label={strings.nav.search}
+              aria-label={t("search")}
             >
               <Search size={18} />
             </button>
@@ -83,7 +104,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
               <button
                 onClick={openCart}
                 className="relative border-2 border-ink bg-ink text-surface w-10 h-10 flex items-center justify-center hover:bg-brand hover:border-brand transition-colors"
-                aria-label={strings.nav.cart}
+                aria-label={t("cart")}
               >
                 <ShoppingCart size={18} />
                 {itemCount > 0 && (
@@ -109,7 +130,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-b-2 border-ink bg-surface">
-            {NAV_LINKS.map(({ href, label, match }) => {
+            {NAV_LINKS.map(({ href, key, match }) => {
               const isActive = pathname.includes(match);
               return (
                 <Link
@@ -119,10 +140,31 @@ export function Navbar({ articles = [] }: NavbarProps) {
                   className={`block px-6 py-4 font-mono text-sm font-bold uppercase tracking-widest border-b border-divider last:border-b-0 transition-colors
                     ${isActive ? "text-brand bg-surface-dim" : "text-ink hover:text-brand"}`}
                 >
-                  {label}
+                  {t(key)}
                 </Link>
               );
             })}
+            {/* Language switcher — mobile */}
+            <div className="flex items-center gap-3 px-6 py-4">
+              <Link
+                href={pathname}
+                locale="es"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest border-2 border-ink transition-colors
+                  ${!isEnglish ? "bg-ink text-surface" : "text-ink hover:text-brand"}`}
+              >
+                ES
+              </Link>
+              <Link
+                href={pathname}
+                locale="en"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest border-2 border-ink transition-colors
+                  ${isEnglish ? "bg-ink text-surface" : "text-ink hover:text-brand"}`}
+              >
+                EN
+              </Link>
+            </div>
           </div>
         )}
 

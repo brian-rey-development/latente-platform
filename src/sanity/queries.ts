@@ -5,6 +5,8 @@ export const ARTICLES_LIST_QUERY = groq`
     _id,
     title,
     titleEn,
+    subtitle,
+    subtitleEn,
     "slug": slug.current,
     "slugEn": slugEn.current,
     "categories": coalesce(categories, [category]),
@@ -23,6 +25,8 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
     _id,
     title,
     titleEn,
+    subtitle,
+    subtitleEn,
     "slug": slug.current,
     "slugEn": slugEn.current,
     "categories": coalesce(categories, [category]),
@@ -35,6 +39,7 @@ export const ARTICLE_BY_SLUG_QUERY = groq`
     coverImage,
     content,
     contentEn,
+    sources,
   }
 `
 
@@ -128,6 +133,53 @@ export const VENTURE_BY_SLUG_QUERY = groq`
 
 export const VENTURE_SLUGS_QUERY = groq`
   *[_type == "venture"] { "slug": slug.current }
+`
+
+export const SIGNALS_LIST_QUERY = groq`
+  *[_type == "signal"] | order(publishedAt desc) {
+    _id,
+    title,
+    titleEn,
+    "slug": slug.current,
+    "slugEn": slugEn.current,
+    category,
+    premium,
+    excerpt,
+    excerptEn,
+    author,
+    publishedAt,
+    sources,
+  }
+`
+
+export const SIGNAL_BY_SLUG_QUERY = groq`
+  *[_type == "signal" && (slug.current == $slug || slugEn.current == $slug)][0] {
+    _id,
+    title,
+    titleEn,
+    "slug": slug.current,
+    "slugEn": slugEn.current,
+    category,
+    premium,
+    excerpt,
+    excerptEn,
+    author,
+    publishedAt,
+    content,
+    contentEn,
+    sources,
+    sourcesEn,
+  }
+`
+
+export const SIGNAL_SLUGS_QUERY = groq`
+  *[_type == "signal"] { "slug": slug.current }
+`
+
+export const SIGNAL_SLUGS_EN_QUERY = groq`
+  *[_type == "signal" && defined(titleEn) && defined(contentEn)] {
+    "slug": coalesce(slugEn.current, slug.current)
+  }
 `
 
 export const PRODUCTS_LIST_QUERY = groq`

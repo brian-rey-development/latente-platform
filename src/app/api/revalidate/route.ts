@@ -32,5 +32,12 @@ export async function POST(request: Request) {
     }
   }
 
+  if (type === 'signal') {
+    revalidatePath('/senales', 'layout')
+    if (slug) {
+      revalidatePath(`/senales/${slug}`, 'page')
+    }
+  }
+
   return Response.json({ revalidated: true, slug, type })
 }

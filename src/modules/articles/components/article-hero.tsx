@@ -1,20 +1,22 @@
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { ArticlePreview } from "../domain/types";
 import { ArticleService } from "../domain/article.service";
 import { formatDate } from "@/shared/lib/format-date";
 import { urlFor } from "@/sanity/image";
 import { CategoryBadge } from "@/shared/ui/category-badge";
 import { buttonVariants } from "@/shared/ui/button";
-import { strings } from "@/shared/lib/strings";
 
 interface ArticleHeroProps {
   readonly article: ArticlePreview;
+  readonly locale?: string;
 }
 
-export function ArticleHero({ article }: ArticleHeroProps) {
-  const resolved = ArticleService.resolvePreviewLocale(article);
+export async function ArticleHero({ article, locale }: ArticleHeroProps) {
+  const t = await getTranslations("article");
+  const resolved = ArticleService.resolvePreviewLocale(article, locale);
 
   const coverSrc = resolved.coverImage
     ? urlFor(resolved.coverImage).width(1600).height(900).url()
@@ -26,11 +28,11 @@ export function ArticleHero({ article }: ArticleHeroProps) {
         <div>
           <div className="flex flex-wrap items-center gap-3 mb-4">
             {resolved.categories.map((cat) => (
-              <CategoryBadge key={cat} category={cat} />
+              <CategoryBadge key={cat} category={cat} locale={locale} />
             ))}
             {resolved.publishedAt && (
               <span className="font-mono text-sm font-bold text-ink uppercase tracking-widest">
-                {strings.article.updatedAt} {formatDate(resolved.publishedAt)}
+                {t("updatedAt")} {formatDate(resolved.publishedAt)}
               </span>
             )}
           </div>
@@ -49,7 +51,7 @@ export function ArticleHero({ article }: ArticleHeroProps) {
           aria-hidden="true"
           tabIndex={-1}
         >
-          <span>{strings.article.readArticle}</span>
+          <span>{t("readArticle")}</span>
           <ArrowRight
             size={24}
             className="group-hover:translate-x-2 transition-transform"
@@ -79,10 +81,10 @@ export function ArticleHero({ article }: ArticleHeroProps) {
         </div>
         <div className="border-t-2 border-border bg-surface p-4 sm:p-6 flex flex-wrap justify-between items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-ink">
           <span>
-            {strings.article.by} {resolved.author}
+            {t("by")} {resolved.author}
           </span>
           <span>
-            {resolved.readTimeMinutes} {strings.article.readTime}
+            {resolved.readTimeMinutes} {t("readTime")}
           </span>
         </div>
       </Link>

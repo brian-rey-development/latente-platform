@@ -33,11 +33,11 @@ export async function generateMetadata({ params }: ArticlesPageProps): Promise<M
 }
 
 export default async function ArticlesPage({ params, searchParams }: ArticlesPageProps) {
-  const [, { cat }] = await Promise.all([params, searchParams])
+  const [{ locale }, { cat }] = await Promise.all([params, searchParams])
 
   const category = ARTICLE_CATEGORIES.includes(cat as ArticleCategory)
     ? (cat as ArticleCategory)
     : undefined
 
-  return <ArticlesArchiveView category={category} />
+  return <ArticlesArchiveView category={category} locale={locale} />
 }

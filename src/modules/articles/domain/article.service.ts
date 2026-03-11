@@ -22,11 +22,25 @@ export const ArticleService = {
     )
   },
 
-  resolveLocale(article: Article): Article {
-    return article
+  resolveLocale(article: Article, locale?: string): Article {
+    if (locale !== 'en') return article
+    return {
+      ...article,
+      title: article.titleEn ?? article.title,
+      subtitle: (article.subtitleEn ?? article.subtitle) as string | undefined,
+      excerpt: article.excerptEn ?? article.excerpt,
+      slug: article.slugEn ?? article.slug,
+      content: article.contentEn ?? article.content,
+    }
   },
 
-  resolvePreviewLocale(article: ArticlePreview): ArticlePreview {
-    return article
+  resolvePreviewLocale(article: ArticlePreview, locale?: string): ArticlePreview {
+    if (locale !== 'en') return article
+    return {
+      ...article,
+      title: article.titleEn ?? article.title,
+      excerpt: article.excerptEn ?? article.excerpt,
+      slug: article.slugEn ?? article.slug,
+    }
   },
 } as const
