@@ -22,7 +22,7 @@ export async function HomeView({ locale }: HomeViewProps) {
   ])
 
   const tagline = (
-    <div className="border-b-2 border-ink px-6 md:px-10 py-6">
+    <div className="border-b-2 border-ink px-6 md:px-10 py-3">
       <p className="font-mono text-sm uppercase tracking-widest text-ink">{t('tagline')}</p>
     </div>
   )

@@ -99,7 +99,7 @@ function SignalCard({ signal, locale, featured }: SignalCardProps) {
       <div className="flex justify-end pt-2 border-t border-white/10">
         <ArrowUpRight
           size={featured ? 18 : 14}
-          className="text-white/30 group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+          className="text-white/60 group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
         />
       </div>
     </Link>

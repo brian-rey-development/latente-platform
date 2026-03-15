@@ -40,7 +40,7 @@ export function Navbar() {
           ${scrolled ? "bg-surface/95 backdrop-blur-sm" : "bg-surface"}`}
       >
         {/* Main header row */}
-        <div className="flex items-center px-6 md:px-10 py-4 border-b-2 border-ink">
+        <div className="flex items-center px-6 md:px-10 py-2.5 border-b-2 border-ink">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="w-6 h-6 md:w-8 md:h-8 bg-brand border-2 border-ink group-hover:rotate-45 transition-transform duration-300" />
