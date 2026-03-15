@@ -29,7 +29,7 @@ export async function HomeSignalsSection({
     <section className="bg-ink text-surface border-b-2 border-ink">
       <div className="px-6 md:px-10 py-4 border-b-2 border-white/10 flex items-baseline justify-between">
         <div className="flex items-baseline gap-4">
-          <h2 className="font-sans font-black text-2xl md:text-3xl uppercase tracking-tight text-brand">
+          <h2 className="font-sans font-black text-2xl md:text-3xl uppercase tracking-tight text-surface">
             {t('heading')}
           </h2>
           <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/50">
