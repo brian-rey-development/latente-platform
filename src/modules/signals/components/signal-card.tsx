@@ -17,9 +17,12 @@ export function SignalCard({ signal }: SignalCardProps) {
       className="group grid grid-cols-[1fr_auto] gap-4 items-start border-b-2 border-ink/10 py-6 hover:bg-surface-dim transition-colors duration-200 px-2 -mx-2"
     >
       <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <span className="w-1 h-4 bg-brand flex-shrink-0" />
+        <div className="flex items-center gap-2">
           <span className="font-mono text-xs font-bold tracking-widest text-brand uppercase">
+            {resolved.category}
+          </span>
+          <span className="text-meta text-xs">·</span>
+          <span className="font-mono text-xs font-bold tracking-widest text-meta uppercase">
             {resolved.publishedAt ? formatDate(resolved.publishedAt) : ''}
           </span>
         </div>

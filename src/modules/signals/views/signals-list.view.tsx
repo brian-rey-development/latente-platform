@@ -1,16 +1,22 @@
+import { getTranslations } from 'next-intl/server'
 import { listSignalsQuery } from '../application/queries/list-signals.query'
 import { SignalList } from '../components/signal-list'
 import { EmptySignals } from '../components/empty-signals'
 
 export async function SignalsListView() {
-  const signals = await listSignalsQuery()
+  const [signals, t] = await Promise.all([
+    listSignalsQuery(),
+    getTranslations('signals'),
+  ])
+
+  const heading = t('heading').toUpperCase()
 
   if (signals.length === 0) {
     return (
       <div>
         <div className="px-6 md:px-10 py-8 border-b-2 border-ink flex items-baseline justify-between">
           <h1 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tight">
-            Señales
+            {heading}
           </h1>
         </div>
         <div className="px-6 md:px-10 py-16">
@@ -24,7 +30,7 @@ export async function SignalsListView() {
     <div>
       <div className="px-6 md:px-10 py-8 border-b-2 border-ink flex items-baseline justify-between">
         <h1 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tight">
-          Señales
+          {heading}
         </h1>
         <span className="font-mono text-sm font-bold uppercase tracking-widest text-muted">
           {signals.length}

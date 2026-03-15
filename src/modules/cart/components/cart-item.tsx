@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { strings } from "@/shared/lib/strings";
+import { useTranslations } from "next-intl";
 import { useCart } from "../hooks/use-cart";
 import { formatPrice } from "@/shared/lib/format-price";
 import type { CartItem as CartItemType } from "../../products/domain/types";
@@ -12,6 +12,7 @@ interface CartItemProps {
 
 export function CartItem({ item }: CartItemProps) {
   const { updateQty, removeItem } = useCart();
+  const t = useTranslations("cart");
 
   return (
     <div className="flex gap-4 border-2 border-ink shadow-brutal bg-surface p-3 mb-2">
@@ -29,7 +30,7 @@ export function CartItem({ item }: CartItemProps) {
         <button
           onClick={() => removeItem(item._id)}
           className="p-2 -mr-2 text-muted hover:text-brand transition-colors"
-          aria-label={strings.cart.removeItem}
+          aria-label={t("removeItem")}
         >
           <Trash2 size={16} />
         </button>
@@ -38,7 +39,7 @@ export function CartItem({ item }: CartItemProps) {
             onClick={() => updateQty(item._id, -1)}
             disabled={item.qty === 1}
             className="p-3 hover:bg-border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            aria-label={strings.cart.decreaseQty}
+            aria-label={t("decreaseQty")}
           >
             <Minus size={14} />
           </button>
@@ -48,7 +49,7 @@ export function CartItem({ item }: CartItemProps) {
           <button
             onClick={() => updateQty(item._id, 1)}
             className="p-3 hover:bg-border transition-colors"
-            aria-label={strings.cart.increaseQty}
+            aria-label={t("increaseQty")}
           >
             <Plus size={14} />
           </button>

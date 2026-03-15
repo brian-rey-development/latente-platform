@@ -8,18 +8,13 @@ import { useCart } from "@/modules/cart/hooks/use-cart";
 import { SearchOverlay } from "@/modules/search/components/search-overlay";
 import { CategoryBar } from "@/layout/category-bar";
 import { FEATURE_FLAGS } from "@/shared/lib/feature-flags";
-import type { ArticlePreview } from "@/modules/articles/domain/types";
 
 const NAV_LINKS = [
   { href: "/articulos", key: "articles", match: "/articulos" },
   { href: "/senales", key: "signals", match: "/senales" },
 ] as const;
 
-interface NavbarProps {
-  readonly articles?: ArticlePreview[];
-}
-
-export function Navbar({ articles = [] }: NavbarProps) {
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -119,7 +114,7 @@ export function Navbar({ articles = [] }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="md:hidden p-2 hover:text-brand transition-colors"
-              aria-label="Menú"
+              aria-label={mobileMenuOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -173,7 +168,6 @@ export function Navbar({ articles = [] }: NavbarProps) {
       </nav>
 
       <SearchOverlay
-        articles={articles}
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
       />

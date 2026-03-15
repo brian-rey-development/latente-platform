@@ -17,7 +17,10 @@
     "subtitle": "Análisis profundos y documentados sobre las fuerzas que reconfiguran el mundo.",
     "label": "LATENTE / REPORTES",
     "empty": "Próximamente.",
-    "readMore": "Leer reporte"
+    "readMore": "Leer reporte",
+    "pages": "PÁG",
+    "endOf": "Fin del reporte.",
+    "paywallMessage": "Este reporte es exclusivo para suscriptores de Latente."
   },
   "labs": {
     "title": "LATENTE LABS.",
@@ -34,7 +37,9 @@
     "heading": "Señales",
     "sub": "Análisis rápido",
     "viewAll": "Ver todas",
-    "soon": "Próximamente"
+    "soon": "Próximamente",
+    "sources": "Fuentes",
+    "endOf": "Fin de señal."
   },
   "articles": {
     "emptyCategory": "Sin artículos en esta categoría aún.",
@@ -49,11 +54,6 @@
     "quote1Author": "George Orwell",
     "quote2Text": "La información es el petróleo del siglo XXI, y el análisis es el motor de combustión.",
     "quote2Author": "Peter Sondergaard",
-    "newsletterCta": "Suscríbete para recibir el primer análisis directamente en tu inbox.",
-    "newsletterPlaceholder": "tu@email.com",
-    "newsletterSubmit": "Suscribirse",
-    "newsletterSuccess": "Listo. Te avisamos cuando publiquemos.",
-    "newsletterError": "Algo salió mal. Intenta de nuevo."
   },
   "article": {
     "back": "Volver",
@@ -144,16 +144,8 @@
     "label": "BUSCAR",
     "placeholder": "Buscar artículos...",
     "noResults": "Sin resultados para \"{query}\"",
+    "resultCount": "{count} resultados",
     "close": "Cerrar búsqueda"
-  },
-  "newsletter": {
-    "heading1": "LATENTE.",
-    "heading2": "EN TU INBOX.",
-    "subtitle": "Análisis semanal. Sin ruido.",
-    "placeholder": "tu@email.com",
-    "submit": "Suscribirse",
-    "success": "Suscrito.",
-    "error": "Error al suscribirse. Intenta de nuevo."
   },
   "footer": {
     "tagline": "Análisis profundo sobre las fuerzas que reconfiguran el mundo.",
@@ -182,5 +174,15 @@
   "locale": {
     "switchTo": "EN",
     "switchLabel": "Switch to English"
+  },
+  "categories": {
+    "all": "TODOS"
+  },
+  "error": {
+    "title": "Error al cargar.",
+    "back": "Volver al inicio"
+  },
+  "a11y": {
+    "skipToContent": "Ir al contenido principal"
   }
 }

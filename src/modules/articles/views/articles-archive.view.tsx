@@ -1,10 +1,10 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { listArticlesQuery } from "../application/queries/list-articles.query";
 import { ArticleService } from "../domain/article.service";
 import { ArticleGrid } from "../components/article-grid";
 import { EmptyArticles } from "../components/empty-articles";
-import { ALL_CATEGORIES_LABEL_ES, translateCategory } from "../domain/constants";
-import { strings } from "@/shared/lib/strings";
+import { translateCategory } from "../domain/constants";
 import type { ArticleCategory } from "../domain/types";
 
 interface ArticlesArchiveViewProps {
@@ -13,13 +13,17 @@ interface ArticlesArchiveViewProps {
 }
 
 export async function ArticlesArchiveView({ category, locale }: ArticlesArchiveViewProps) {
-  const articles = await listArticlesQuery();
+  const [articles, tArticles, tCategories] = await Promise.all([
+    listArticlesQuery(),
+    getTranslations("articles"),
+    getTranslations("categories"),
+  ]);
 
   const filtered = category
     ? ArticleService.filterByCategory(articles, category)
     : articles;
 
-  const heading = category ? translateCategory(category, locale) : ALL_CATEGORIES_LABEL_ES;
+  const heading = category ? translateCategory(category, locale) : tCategories("all");
 
   if (filtered.length === 0) {
     if (category) {
@@ -30,15 +34,15 @@ export async function ArticlesArchiveView({ category, locale }: ArticlesArchiveV
               href="/articulos"
               className="font-mono text-xs font-bold uppercase tracking-widest text-muted hover:text-brand transition-colors"
             >
-              {strings.articles.emptyCategoryBack}
+              {tArticles("emptyCategoryBack")}
             </Link>
           </div>
           <div className="px-6 md:px-10 pt-16 pb-32">
             <p className="font-mono text-xs font-bold uppercase tracking-widest text-brand mb-6">
-              {category ? translateCategory(category, locale) : ALL_CATEGORIES_LABEL_ES}
+              {heading}
             </p>
             <p className="font-sans font-black text-4xl md:text-6xl uppercase tracking-tight text-ink leading-[1.05]">
-              {strings.articles.emptyCategory}
+              {tArticles("emptyCategory")}
             </p>
           </div>
         </div>

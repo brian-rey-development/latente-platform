@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { strings } from "@/shared/lib/strings";
 import type { ArticlePreview } from "@/modules/articles/domain/types";
 
 interface SearchResultItemProps {
   readonly article: ArticlePreview;
+  readonly premiumLabel: string;
   readonly onClose: () => void;
 }
 
-export function SearchResultItem({ article, onClose }: SearchResultItemProps) {
+export function SearchResultItem({ article, premiumLabel, onClose }: SearchResultItemProps) {
   return (
     <Link
       href={`/articulos/${article.slug}`}
@@ -21,7 +21,7 @@ export function SearchResultItem({ article, onClose }: SearchResultItemProps) {
       <div className="grow">
         <span className="font-mono text-sm font-bold tracking-widest text-surface/60 group-hover:text-brand-muted uppercase block mb-1.5 transition-colors duration-150">
           {article.categories.join(" / ")}
-          {article.premium && ` // ${strings.premium.label}`}
+          {article.premium && ` // ${premiumLabel}`}
         </span>
         <p className="font-sans font-bold text-base uppercase leading-tight text-surface">
           {article.title}

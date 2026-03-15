@@ -7,5 +7,4 @@ export const ANALYTICS_EVENTS = {
   ADD_TO_CART: 'add_to_cart',
   CHECKOUT_STARTED: 'checkout_started',
   CHECKOUT_COMPLETED: 'checkout_completed',
-  NEWSLETTER_SUBSCRIBED: 'newsletter_subscribed',
 } as const

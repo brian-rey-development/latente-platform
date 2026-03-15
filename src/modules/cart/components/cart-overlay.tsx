@@ -2,19 +2,20 @@
 
 import { useEffect } from "react";
 import { X, ShoppingBag } from "lucide-react";
-import { strings } from "@/shared/lib/strings";
+import { useTranslations } from "next-intl";
+import { lockBodyScroll, unlockBodyScroll } from "@/shared/lib/overflow-lock";
 import { useCart } from "../hooks/use-cart";
 import { CartItem as CartItemRow } from "./cart-item";
 import { CartSummary } from "./cart-summary";
 
 export function CartOverlay() {
   const { items, isOpen, closeCart } = useCart();
+  const t = useTranslations("cart");
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!isOpen) return
+    lockBodyScroll()
+    return () => unlockBodyScroll()
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -33,13 +34,13 @@ export function CartOverlay() {
           <div className="flex items-center gap-3">
             <ShoppingBag size={28} className="text-brand" />
             <span className="font-sans font-black text-3xl uppercase tracking-tighter">
-              {strings.cart.title}
+              {t("title")}
             </span>
           </div>
           <button
             onClick={closeCart}
             className="hover:text-brand transition-colors cursor-pointer"
-            aria-label={strings.cart.close}
+            aria-label={t("close")}
           >
             <X size={32} />
           </button>
@@ -51,7 +52,7 @@ export function CartOverlay() {
             <div className="h-full flex flex-col items-center justify-center gap-4 text-meta">
               <ShoppingBag size={64} className="text-divider" />
               <p className="font-mono text-sm uppercase tracking-widest text-center font-bold">
-                {strings.cart.empty}
+                {t("empty")}
               </p>
             </div>
           ) : (

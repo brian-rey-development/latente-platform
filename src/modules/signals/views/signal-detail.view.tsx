@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { PortableText } from '@portabletext/react'
+import { getTranslations } from 'next-intl/server'
 import { getSignalQuery } from '../application/queries/get-signal.query'
 import { portableTextComponents } from '@/modules/articles/components/content-block'
 import { CategoryBadge } from '@/shared/ui/category-badge'
@@ -14,7 +15,11 @@ interface SignalDetailViewProps {
 }
 
 export async function SignalDetailView({ slug, locale }: SignalDetailViewProps) {
-  const signal = await getSignalQuery(slug)
+  const [signal, tNav, tSignals] = await Promise.all([
+    getSignalQuery(slug),
+    getTranslations('nav'),
+    getTranslations('signals'),
+  ])
 
   if (!signal) {
     notFound()
@@ -37,7 +42,7 @@ export async function SignalDetailView({ slug, locale }: SignalDetailViewProps) 
             className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest text-brand border-2 border-brand px-4 py-2 hover:bg-brand hover:text-ink transition-colors mb-10 md:mb-14"
           >
             <ArrowLeft size={14} />
-            {isEn ? 'Signals' : 'Señales'}
+            {tNav('signals')}
           </Link>
 
           <div className="flex flex-wrap gap-3 mb-6">
@@ -65,7 +70,7 @@ export async function SignalDetailView({ slug, locale }: SignalDetailViewProps) 
         {sources && sources.length > 0 && (
           <div className="max-w-2xl mt-16 pt-10 border-t-4 border-ink">
             <h2 className="font-mono text-xs font-bold uppercase tracking-widest text-muted mb-6">
-              {isEn ? 'Sources' : 'Fuentes'}
+              {tSignals('sources')}
             </h2>
             <ul className="space-y-3">
               {sources.map((src, i) => (
@@ -81,7 +86,7 @@ export async function SignalDetailView({ slug, locale }: SignalDetailViewProps) 
         )}
 
         <div className="max-w-2xl mt-16 pt-10 border-t-4 border-ink flex justify-between items-center font-mono font-bold uppercase tracking-widest text-ink">
-          <span>{isEn ? 'End of signal' : 'Fin de señal'}</span>
+          <span>{tSignals('endOf')}</span>
           <span className="text-brand text-xl animate-pulse">{'///'}</span>
         </div>
       </div>

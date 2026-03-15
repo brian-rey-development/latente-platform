@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-interface ArticleErrorProps {
+interface ErrorProps {
   readonly error: Error & { digest?: string };
   readonly reset: () => void;
 }
 
-export default function ArticleError({ reset }: ArticleErrorProps) {
+export default function GlobalError({ reset }: ErrorProps) {
   const t = useTranslations("error");
 
   return (

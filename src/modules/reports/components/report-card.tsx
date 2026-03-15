@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { Lock } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import type { ReportPreview } from "../domain/types";
 import { ReportService } from "../domain/report.service";
 import { formatDate } from "@/shared/lib/format-date";
@@ -12,8 +13,12 @@ interface ReportCardProps {
   readonly index: number;
 }
 
-export function ReportCard({ report, index }: ReportCardProps) {
-  const resolved = ReportService.resolvePreviewLocale(report);
+export async function ReportCard({ report, index }: ReportCardProps) {
+  const [resolved, tPremium, tReports] = await Promise.all([
+    Promise.resolve(ReportService.resolvePreviewLocale(report)),
+    getTranslations('premium'),
+    getTranslations('reports'),
+  ]);
 
   const coverSrc = resolved.coverImage
     ? urlFor(resolved.coverImage).width(900).height(600).url()
@@ -34,7 +39,7 @@ export function ReportCard({ report, index }: ReportCardProps) {
           <div className="absolute top-4 right-4 z-20">
             <span className="inline-flex items-center gap-1.5 font-mono text-sm font-bold px-2 py-1 border border-brand text-brand uppercase tracking-widest bg-surface">
               <Lock size={10} />
-              CLASIFICADO
+              {tPremium('label')}
             </span>
           </div>
         )}
@@ -70,7 +75,7 @@ export function ReportCard({ report, index }: ReportCardProps) {
             )}
             {resolved.pageCount && (
               <span className="text-brand group-hover:text-surface">
-                {resolved.pageCount} PÁG
+                {resolved.pageCount} {tReports('pages')}
               </span>
             )}
           </div>

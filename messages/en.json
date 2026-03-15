@@ -17,7 +17,10 @@
     "subtitle": "Deep, documented analysis on the forces reshaping the world.",
     "label": "LATENTE / REPORTS",
     "empty": "Coming soon.",
-    "readMore": "Read report"
+    "readMore": "Read report",
+    "pages": "PAGES",
+    "endOf": "End of report.",
+    "paywallMessage": "This report is exclusive to Latente subscribers. Join to read the full analysis."
   },
   "labs": {
     "title": "LATENTE LABS.",
@@ -34,7 +37,9 @@
     "heading": "Signals",
     "sub": "Quick analysis",
     "viewAll": "See all",
-    "soon": "Coming soon"
+    "soon": "Coming soon",
+    "sources": "Sources",
+    "endOf": "End of signal."
   },
   "articles": {
     "emptyCategory": "No articles in this category yet.",
@@ -49,11 +54,6 @@
     "quote1Author": "George Orwell",
     "quote2Text": "Information is the oil of the 21st century, and analytics is the combustion engine.",
     "quote2Author": "Peter Sondergaard",
-    "newsletterCta": "Subscribe to receive our first analysis directly in your inbox.",
-    "newsletterPlaceholder": "your@email.com",
-    "newsletterSubmit": "Subscribe",
-    "newsletterSuccess": "Done. We'll notify you when we publish.",
-    "newsletterError": "Something went wrong. Please try again."
   },
   "article": {
     "back": "Back",
@@ -144,16 +144,8 @@
     "label": "SEARCH",
     "placeholder": "Search articles...",
     "noResults": "No results for \"{query}\"",
+    "resultCount": "{count} results",
     "close": "Close search"
-  },
-  "newsletter": {
-    "heading1": "LATENTE.",
-    "heading2": "IN YOUR INBOX.",
-    "subtitle": "Weekly analysis. No noise.",
-    "placeholder": "your@email.com",
-    "submit": "Subscribe",
-    "success": "Subscribed.",
-    "error": "Error subscribing. Please try again."
   },
   "footer": {
     "tagline": "Deep analysis on the forces reshaping the world.",
@@ -182,5 +174,15 @@
   "locale": {
     "switchTo": "ES",
     "switchLabel": "Cambiar a Español"
+  },
+  "categories": {
+    "all": "ALL"
+  },
+  "error": {
+    "title": "Failed to load.",
+    "back": "Back to home"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content"
   }
 }

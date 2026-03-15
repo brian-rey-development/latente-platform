@@ -3,16 +3,16 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import {
-  ARTICLE_CATEGORIES,
-  ALL_CATEGORIES_LABEL_ES,
-} from "@/modules/articles/domain/constants";
+import { useTranslations, useLocale } from "next-intl";
+import { ARTICLE_CATEGORIES, translateCategory } from "@/modules/articles/domain/constants";
 import type { ArticleCategory } from "@/modules/articles/domain/types";
 
 function CategoryBarInner() {
   const searchParams = useSearchParams();
+  const t = useTranslations("categories");
+  const locale = useLocale();
 
-  const activeCat = searchParams.get("cat") ?? ALL_CATEGORIES_LABEL_ES;
+  const isAllActive = !searchParams.get("cat");
 
   const itemClass = (isActive: boolean) =>
     isActive
@@ -24,18 +24,18 @@ function CategoryBarInner() {
       <div className="flex w-max font-mono text-sm font-bold uppercase tracking-widest">
         <Link
           href="/articulos"
-          className={itemClass(activeCat === ALL_CATEGORIES_LABEL_ES)}
+          className={itemClass(isAllActive)}
         >
-          {ALL_CATEGORIES_LABEL_ES}
+          {t("all")}
         </Link>
 
         {ARTICLE_CATEGORIES.map((cat: ArticleCategory) => (
           <Link
             key={cat}
             href={`/articulos?cat=${encodeURIComponent(cat)}`}
-            className={itemClass(activeCat === cat)}
+            className={itemClass(searchParams.get("cat") === cat)}
           >
-            {cat}
+            {translateCategory(cat, locale)}
           </Link>
         ))}
       </div>

@@ -1,41 +1,71 @@
 import { revalidatePath } from 'next/cache'
+import crypto from 'crypto'
+
+const LOCALES = ['es', 'en'] as const
+
+// With localePrefix: 'as-needed', Spanish (default) has no prefix.
+// English has /en/ prefix. We must revalidate both forms.
+function localePath(locale: string, path: string): string {
+  return locale === 'es' ? path : `/en${path}`
+}
+
+function isValidSecret(incoming: string | null): boolean {
+  const expected = process.env.REVALIDATE_SECRET
+  if (!incoming || !expected || incoming.length !== expected.length) return false
+  return crypto.timingSafeEqual(Buffer.from(incoming), Buffer.from(expected))
+}
 
 export async function POST(request: Request) {
-  const secret = request.headers.get('x-sanity-webhook-secret')
-
-  if (secret !== process.env.REVALIDATE_SECRET) {
+  if (!isValidSecret(request.headers.get('x-sanity-webhook-secret'))) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const body = await request.json() as { slug?: { current?: string }; _type?: string }
+  let body: { slug?: { current?: string }; _type?: string }
+  try {
+    body = await request.json()
+  } catch {
+    return Response.json({ error: 'Bad request' }, { status: 400 })
+  }
+
   const slug = body?.slug?.current
   const type = body?._type
 
-  revalidatePath('/', 'layout')
-  revalidatePath('/tienda', 'page')
+  // Revalidate root layout for all locales
+  for (const locale of LOCALES) {
+    revalidatePath(localePath(locale, '/'), 'layout')
+    revalidatePath(localePath(locale, '/tienda'), 'page')
+  }
 
   if (type === 'article' && slug) {
-    revalidatePath(`/articulos/${slug}`)
+    for (const locale of LOCALES) {
+      revalidatePath(localePath(locale, `/articulos/${slug}`), 'page')
+    }
   }
 
   if (type === 'report') {
-    revalidatePath('/reportes', 'layout')
-    if (slug) {
-      revalidatePath(`/reportes/${slug}`, 'page')
+    for (const locale of LOCALES) {
+      revalidatePath(localePath(locale, '/reportes'), 'page')
+      if (slug) {
+        revalidatePath(localePath(locale, `/reportes/${slug}`), 'page')
+      }
     }
   }
 
   if (type === 'venture') {
-    revalidatePath('/labs', 'layout')
-    if (slug) {
-      revalidatePath(`/labs/${slug}`, 'page')
+    for (const locale of LOCALES) {
+      revalidatePath(localePath(locale, '/labs'), 'page')
+      if (slug) {
+        revalidatePath(localePath(locale, `/labs/${slug}`), 'page')
+      }
     }
   }
 
   if (type === 'signal') {
-    revalidatePath('/senales', 'layout')
-    if (slug) {
-      revalidatePath(`/senales/${slug}`, 'page')
+    for (const locale of LOCALES) {
+      revalidatePath(localePath(locale, '/senales'), 'page')
+      if (slug) {
+        revalidatePath(localePath(locale, `/senales/${slug}`), 'page')
+      }
     }
   }
 
