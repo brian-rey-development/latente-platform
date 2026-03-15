@@ -23,7 +23,7 @@ export function RegisterForm({ formData, onChange, onSubmit }: RegisterFormProps
         type="email"
         value={formData.email}
         onChange={onChange}
-        placeholder="tu@email.com"
+        placeholder={t('emailPlaceholder')}
         required
         theme="dark"
       />

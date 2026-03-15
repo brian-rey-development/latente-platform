@@ -41,6 +41,7 @@ export async function ArticleDetailView({ slug, locale }: ArticleDetailViewProps
     description: article.excerpt,
     author: { '@type': 'Person', name: article.author },
     datePublished: article.publishedAt,
+    dateModified: rawArticle._updatedAt ?? rawArticle.publishedAt,
     image: coverSrc ?? undefined,
     publisher: {
       '@type': 'Organization',
@@ -49,11 +50,30 @@ export async function ArticleDetailView({ slug, locale }: ArticleDetailViewProps
     },
   }
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'LATENTE.', item: SITE_URL },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: locale === 'en' ? 'Articles' : 'Artículos',
+        item: locale === 'en' ? `${SITE_URL}/en/articulos` : `${SITE_URL}/articulos`,
+      },
+      { '@type': 'ListItem', position: 3, name: article.title, item: articleUrl },
+    ],
+  }
+
   return (
     <article className="min-h-screen bg-surface flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, '\\u003c') }}
       />
 
       <ReadTracker article={article} />

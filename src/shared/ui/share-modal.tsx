@@ -12,6 +12,7 @@ export interface ShareModalLabels {
   readonly telegram: string
   readonly copyLink: string
   readonly copied: string
+  readonly close: string
 }
 
 interface ShareModalProps {
@@ -119,7 +120,7 @@ export function ShareModal({ isOpen, onClose, url, articleTitle, labels }: Share
           </p>
           <button
             onClick={onClose}
-            aria-label="Close"
+            aria-label={labels.close}
             className="w-8 h-8 flex items-center justify-center hover:text-brand transition-colors"
           >
             <X size={16} />

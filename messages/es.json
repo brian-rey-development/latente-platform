@@ -5,7 +5,8 @@
     "reports": "Reportes",
     "labs": "Labs",
     "store": "Tienda",
-    "manifesto": "Manifiesto",
+    "about": "Sobre Latente",
+    "sections": "Secciones",
     "access": "Acceso",
     "search": "Buscar",
     "cart": "Carrito",
@@ -20,7 +21,7 @@
     "readMore": "Leer reporte",
     "pages": "PÁG",
     "endOf": "Fin del reporte.",
-    "paywallMessage": "Este reporte es exclusivo para suscriptores de Latente."
+    "paywallMessage": "Este reporte está reservado para suscriptores. Latente entrega inteligencia estratégica sobre IA, geopolítica y bio-ingeniería - sin publicidad, sin ruido."
   },
   "labs": {
     "title": "LATENTE LABS.",
@@ -31,7 +32,9 @@
   },
   "home": {
     "noArticles": "Sin artículos publicados.",
-    "featured": "Destacados"
+    "featured": "Destacados",
+    "tagline": "Inteligencia estratégica sobre las fuerzas que reconfiguran el mundo.",
+    "subtitle": ""
   },
   "signals": {
     "heading": "Señales",
@@ -75,11 +78,12 @@
     "linkedin": "LinkedIn",
     "telegram": "Telegram",
     "copyLink": "Copiar enlace",
-    "copied": "Enlace copiado"
+    "copied": "Enlace copiado",
+    "close": "Cerrar"
   },
   "paywall": {
-    "title": "SÓLO PARA SUSCRIPTORES",
-    "message": "Este artículo es exclusivo para suscriptores de Latente. Únete para acceder al análisis completo.",
+    "title": "CLASIFICADO",
+    "message": "Este análisis está reservado para suscriptores. Latente entrega inteligencia estratégica sobre IA, geopolítica y bio-ingeniería - sin publicidad, sin ruido.",
     "cta": "Suscribirse"
   },
   "premium": {
@@ -88,7 +92,7 @@
   "store": {
     "heading1": "TIENDA.",
     "heading2": "",
-    "subtitle": "Publicaciones, objetos y membresías de Latente.",
+    "subtitle": "Publicaciones, objetos y membresías. Construido por Latente.",
     "noProducts": "Sin productos disponibles.",
     "addToCart": "Agregar {name} al carrito"
   },
@@ -127,10 +131,11 @@
   "auth": {
     "panelTitle1": "ACCESO.",
     "panelTitle2": "",
-    "panelSubtitle": "Inicia sesión para leer el análisis completo.",
+    "panelSubtitle": "Accede al análisis completo. Sin publicidad, sin ruido - inteligencia estratégica pura.",
     "loginTitle": "Iniciar sesión",
     "registerTitle": "Crear cuenta",
     "email": "Email",
+    "emailPlaceholder": "tu@email.com",
     "password": "Contraseña",
     "passwordPlaceholder": "Mínimo 8 caracteres",
     "loginButton": "Iniciar sesión",
@@ -153,23 +158,27 @@
     "rights": "© {year} LATENTE. Todos los derechos reservados.",
     "articles": "Artículos",
     "store": "Tienda",
-    "manifesto": "Manifiesto",
+    "about": "Sobre Latente",
     "access": "Acceso"
   },
   "ticker": {
     "items": ["GEOPOLÍTICA", "INTELIGENCIA ARTIFICIAL", "BIO-INGENIERÍA", "ECONOMÍA"]
   },
-  "manifesto": {
-    "titleLine1": "EL",
-    "titleLine2": "MANIFIESTO.",
-    "metaDescription": "Latente es una publicación que emerge en el espacio entre el ruido y el silencio.",
-    "lead": "No somos un medio de comunicación. Somos señal para el futuro inmediato.",
-    "body1": "En una era definida por el colapso de la verdad compartida y la aceleración exponencial del hardware, el análisis tradicional ha quedado obsoleto. Las noticias son ruido; el código, los semiconductores y los genomas son la señal real.",
-    "body2": "nace de una necesidad de supervivencia intelectual. Observamos la intersección brutal entre la Inteligencia Artificial, la geopolítica de escasez y la reescritura de la biología.",
-    "quote": "El internet visual se convertirá en un museo nostálgico; la verdadera economía operará invisiblemente a través de cables submarinos a la velocidad de la luz, entre máquinas que no necesitan comprender el lenguaje humano.",
-    "body3": "Nuestra promesa es simple: Cero fricción. Cero publicidad. Inteligencia estratégica pura, entregada sin adornos. Creemos en el derecho a entender las fuerzas invisibles que están empaquetando el mundo en arquitecturas de silicio.",
-    "protocol": "/// INICIAR PROTOCOLO /// VERSIÓN 4.0.1 ///",
-    "cta": "Leer artículos"
+  "about": {
+    "title": "SOBRE LATENTE.",
+    "metaDescription": "Inteligencia estratégica sobre IA, geopolítica, bio-ingeniería e infraestructura. Análisis profundo para quienes toman decisiones sobre el futuro.",
+    "whatTitle": "QUÉ ES LATENTE",
+    "what": "Latente es una publicación editorial sobre las fuerzas que reconfiguran el mundo. Sin publicidad, sin ruido - solo señal.",
+    "coversTitle": "QUÉ CUBRIMOS",
+    "cover0": "Inteligencia Artificial - El rediseño de la cognición y la economía.",
+    "cover1": "Bio-Ingeniería - La reescritura del código de la vida.",
+    "cover2": "Geopolítica - Las tensiones que redistribuyen el poder global.",
+    "cover3": "Infraestructura - Los sistemas físicos y digitales que mueven el mundo.",
+    "cover4": "Cultura - Las ideas que forman lo que viene.",
+    "forTitle": "PARA QUIÉN",
+    "for": "Founders, operadores e intelectuales en LATAM que toman decisiones sobre el futuro.",
+    "contactTitle": "CONTACTO",
+    "contact": "contacto@latente.xyz"
   },
   "locale": {
     "switchTo": "EN",
@@ -180,7 +189,8 @@
   },
   "error": {
     "title": "Error al cargar.",
-    "back": "Volver al inicio"
+    "back": "Volver al inicio",
+    "retry": "Reintentar"
   },
   "a11y": {
     "skipToContent": "Ir al contenido principal"

@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: SignalsPageProps): Promise<Me
   const title = locale === 'es' ? 'Señales' : 'Signals'
   const description =
     locale === 'es'
-      ? 'Análisis rápido y contexto sobre lo que está pasando ahora en IA, geopolítica, bio-ingeniería e infraestructura.'
-      : 'Fast analysis and context on what is happening now in AI, geopolitics, bioengineering and infrastructure.'
+      ? 'Señales rápidas sobre IA, geopolítica, bio-ingeniería e infraestructura. Contexto inmediato sobre lo que está pasando ahora.'
+      : 'Quick signals on AI, geopolitics, bioengineering and infrastructure. Immediate context on what is happening now.'
 
   return {
     title,

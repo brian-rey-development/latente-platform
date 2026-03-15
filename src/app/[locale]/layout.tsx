@@ -10,7 +10,7 @@ import { SiteFooter } from '@/layout/site-footer'
 import { CartOverlay } from '@/modules/cart/components/cart-overlay'
 import { AnalyticsProvider } from '@/modules/analytics/infrastructure/posthog.provider'
 import type { Locale } from '@/i18n/routing'
-import { SITE_NAME } from '@/shared/lib/site-config'
+import { SITE_NAME, SITE_URL } from '@/shared/lib/site-config'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
 
   const description =
     locale === 'es'
-      ? 'Publicación sobre geopolítica, inteligencia artificial, bio-ingeniería y economía. Análisis lento y profundo sobre las fuerzas que reconfiguran el mundo.'
-      : 'A publication on geopolitics, artificial intelligence, bioengineering and economics. Deep analysis on the forces reshaping the world.'
+      ? 'Inteligencia estratégica sobre IA, geopolítica, bio-ingeniería e infraestructura. Análisis profundo en español para quienes toman decisiones sobre el futuro.'
+      : 'Strategic intelligence on AI, geopolitics, bioengineering and infrastructure. Deep analysis for decision-makers shaping the future.'
 
   return {
     description,
@@ -49,6 +49,20 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
     },
     twitter: { card: 'summary_large_image' },
   }
+}
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL,
+}
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL,
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
@@ -68,6 +82,14 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd).replace(/</g, '\\u003c') }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd).replace(/</g, '\\u003c') }}
+        />
         <NextIntlClientProvider messages={messages}>
           <AnalyticsProvider>
             <div className="w-full min-h-screen flex flex-col bg-surface">

@@ -23,6 +23,7 @@ export const ARTICLES_LIST_QUERY = groq`
 export const ARTICLE_BY_SLUG_QUERY = groq`
   *[_type == "article" && (slug.current == $slug || slugEn.current == $slug)][0] {
     _id,
+    _updatedAt,
     title,
     titleEn,
     subtitle,
@@ -97,6 +98,12 @@ export const REPORT_SLUGS_QUERY = groq`
   *[_type == "report"] { "slug": slug.current }
 `
 
+export const REPORT_SLUGS_EN_QUERY = groq`
+  *[_type == "report" && defined(titleEn) && defined(contentEn)] {
+    "slug": coalesce(slugEn.current, slug.current)
+  }
+`
+
 export const VENTURES_LIST_QUERY = groq`
   *[_type == "venture"] | order(_createdAt asc) {
     _id,
@@ -155,6 +162,7 @@ export const SIGNALS_LIST_QUERY = groq`
 export const SIGNAL_BY_SLUG_QUERY = groq`
   *[_type == "signal" && (slug.current == $slug || slugEn.current == $slug)][0] {
     _id,
+    _updatedAt,
     title,
     titleEn,
     "slug": slug.current,

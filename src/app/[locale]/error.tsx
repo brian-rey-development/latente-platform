@@ -25,7 +25,7 @@ export default function GlobalError({ reset }: ErrorProps) {
             onClick={reset}
             className="font-mono text-sm font-bold uppercase tracking-widest border-2 border-ink px-6 py-3 hover:bg-ink hover:text-surface transition-colors"
           >
-            Retry
+            {t('retry')}
           </button>
           <Link
             href="/"

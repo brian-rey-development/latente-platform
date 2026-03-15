@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCart } from "@/modules/cart/hooks/use-cart";
 import { useAnalytics } from "@/modules/analytics/hooks/use-analytics";
 import { ANALYTICS_EVENTS } from "@/modules/analytics/domain/constants";
@@ -16,6 +17,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, isLast }: ProductCardProps) {
+  const t = useTranslations('store');
   const { addItem } = useCart();
   const { track } = useAnalytics();
 
@@ -65,7 +67,7 @@ export function ProductCard({ product, isLast }: ProductCardProps) {
           <Button
             variant="icon"
             onClick={handleAddToCart}
-            aria-label={`Agregar ${product.name} al carrito`}
+            aria-label={t('addToCart', { name: product.name })}
           >
             <Plus size={24} />
           </Button>

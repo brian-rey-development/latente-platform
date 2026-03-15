@@ -12,6 +12,7 @@ import { FEATURE_FLAGS } from "@/shared/lib/feature-flags";
 const NAV_LINKS = [
   { href: "/articulos", key: "articles", match: "/articulos" },
   { href: "/senales", key: "signals", match: "/senales" },
+  { href: "/sobre", key: "about", match: "/sobre" },
 ] as const;
 
 export function Navbar() {
@@ -49,7 +50,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop section nav */}
-          <nav className="hidden md:flex items-center gap-6 ml-8" aria-label="Secciones">
+          <nav className="hidden md:flex items-center gap-6 ml-8" aria-label={t('sections')}>
             {NAV_LINKS.map(({ href, key, match }) => {
               const isActive = pathname.includes(match);
               return (

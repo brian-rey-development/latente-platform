@@ -53,9 +53,9 @@ export default function DefaultOgImage() {
               margin: 0,
             }}
           >
-            CARTOGRAFÍA
+            INTELIGENCIA
             <br />
-            DEL FUTURO.
+            ESTRATÉGICA.
           </p>
         </div>
 

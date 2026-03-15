@@ -67,6 +67,7 @@ export async function ArticleAside({ article }: ArticleAsideProps) {
             telegram: tShare('telegram'),
             copyLink: tShare('copyLink'),
             copied: tShare('copied'),
+            close: tShare('close'),
           }}
         />
       </div>

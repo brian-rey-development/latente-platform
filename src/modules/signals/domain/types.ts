@@ -19,6 +19,7 @@ export interface SignalPreview {
 }
 
 export interface Signal extends SignalPreview {
+  readonly _updatedAt?: string
   readonly content: PortableTextBlock[]
   readonly contentEn?: PortableTextBlock[]
   readonly sourcesEn?: readonly string[]

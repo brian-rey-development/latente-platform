@@ -7,6 +7,7 @@ import { getSignalQuery } from '../application/queries/get-signal.query'
 import { portableTextComponents } from '@/modules/articles/components/content-block'
 import { CategoryBadge } from '@/shared/ui/category-badge'
 import { formatDate } from '@/shared/lib/format-date'
+import { SITE_URL, SITE_NAME } from '@/shared/lib/site-config'
 import type { Locale } from '@/i18n/routing'
 
 interface SignalDetailViewProps {
@@ -33,8 +34,46 @@ export async function SignalDetailView({ slug, locale }: SignalDetailViewProps) 
 
   const backHref = '/senales'
 
+  const signalUrl =
+    locale === 'es' ? `${SITE_URL}/senales/${slug}` : `${SITE_URL}/en/senales/${slug}`
+
+  const signalLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    url: signalUrl,
+    headline: title,
+    description: excerpt,
+    author: { '@type': 'Person', name: signal.author },
+    datePublished: signal.publishedAt,
+    dateModified: signal._updatedAt ?? signal.publishedAt,
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  }
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'LATENTE.', item: SITE_URL },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: locale === 'en' ? 'Signals' : 'Señales',
+        item: locale === 'en' ? `${SITE_URL}/en/senales` : `${SITE_URL}/senales`,
+      },
+      { '@type': 'ListItem', position: 3, name: title, item: signalUrl },
+    ],
+  }
+
   return (
     <article className="min-h-screen bg-surface">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(signalLd).replace(/</g, '\\u003c') }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, '\\u003c') }}
+      />
       <header className="bg-ink text-surface pt-8 md:pt-12 pb-14 md:pb-20 border-b-2 border-ink">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <Link

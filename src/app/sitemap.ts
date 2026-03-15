@@ -3,18 +3,23 @@ import { getArticleSlugsQuery } from '@/modules/articles/application/queries/get
 import { getArticleSlugsEnQuery } from '@/modules/articles/application/queries/get-article-slugs-en.query'
 import { getSignalSlugsQuery } from '@/modules/signals/application/queries/get-signal-slugs.query'
 import { getSignalSlugsEnQuery } from '@/modules/signals/application/queries/get-signal-slugs-en.query'
+import { getReportSlugsQuery } from '@/modules/reports/application/queries/get-report-slugs.query'
+import { getReportSlugsEnQuery } from '@/modules/reports/application/queries/get-report-slugs-en.query'
 import { SITE_URL } from '@/shared/lib/site-config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [esSlugs, enSlugs, esSignalSlugs, enSignalSlugs] = await Promise.all([
+  const [esSlugs, enSlugs, esSignalSlugs, enSignalSlugs, esReportSlugs, enReportSlugs] = await Promise.all([
     getArticleSlugsQuery().catch(() => [] as string[]),
     getArticleSlugsEnQuery().catch(() => [] as string[]),
     getSignalSlugsQuery().catch(() => [] as string[]),
     getSignalSlugsEnQuery().catch(() => [] as string[]),
+    getReportSlugsQuery().catch(() => [] as string[]),
+    getReportSlugsEnQuery().catch(() => [] as string[]),
   ])
 
   const enSlugSet = new Set(enSlugs)
   const enSignalSlugSet = new Set(enSignalSlugs)
+  const enReportSlugSet = new Set(enReportSlugs)
 
   const esArticleRoutes: MetadataRoute.Sitemap = esSlugs.map((slug) => ({
     url: `${SITE_URL}/articulos/${slug}`,
@@ -143,8 +148,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     },
-    { url: `${SITE_URL}/tienda`, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${SITE_URL}/en/tienda`, changeFrequency: 'weekly', priority: 0.7 },
+    {
+      url: `${SITE_URL}/tienda`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+      alternates: { languages: { es: `${SITE_URL}/tienda`, en: `${SITE_URL}/en/tienda` } },
+    },
+    {
+      url: `${SITE_URL}/en/tienda`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+      alternates: { languages: { es: `${SITE_URL}/tienda`, en: `${SITE_URL}/en/tienda` } },
+    },
+    {
+      url: `${SITE_URL}/sobre`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: { es: `${SITE_URL}/sobre`, en: `${SITE_URL}/en/sobre` } },
+    },
+    {
+      url: `${SITE_URL}/en/sobre`,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: { es: `${SITE_URL}/sobre`, en: `${SITE_URL}/en/sobre` } },
+    },
   ]
 
   const esSignalRoutes: MetadataRoute.Sitemap = esSignalSlugs.map((slug) => ({
@@ -173,5 +200,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   }))
 
-  return [...staticRoutes, ...esArticleRoutes, ...enArticleRoutes, ...esSignalRoutes, ...enSignalRoutes]
+  const esReportRoutes: MetadataRoute.Sitemap = esReportSlugs.map((slug) => ({
+    url: `${SITE_URL}/reportes/${slug}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+    ...(enReportSlugSet.has(slug) && {
+      alternates: {
+        languages: {
+          es: `${SITE_URL}/reportes/${slug}`,
+          en: `${SITE_URL}/en/reportes/${slug}`,
+        },
+      },
+    }),
+  }))
+
+  const enReportRoutes: MetadataRoute.Sitemap = enReportSlugs.map((slug) => ({
+    url: `${SITE_URL}/en/reportes/${slug}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+    alternates: {
+      languages: {
+        es: `${SITE_URL}/reportes/${slug}`,
+        en: `${SITE_URL}/en/reportes/${slug}`,
+      },
+    },
+  }))
+
+  return [
+    ...staticRoutes,
+    ...esArticleRoutes,
+    ...enArticleRoutes,
+    ...esSignalRoutes,
+    ...enSignalRoutes,
+    ...esReportRoutes,
+    ...enReportRoutes,
+  ]
 }

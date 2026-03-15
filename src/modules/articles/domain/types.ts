@@ -27,6 +27,7 @@ export interface ArticlePreview {
 }
 
 export interface Article extends ArticlePreview {
+  readonly _updatedAt?: string
   readonly content: PortableTextBlock[]
   readonly contentEn?: PortableTextBlock[]
   readonly sources?: readonly string[]

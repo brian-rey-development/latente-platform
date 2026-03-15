@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: ArticlesPageProps): Promise<M
   const title = locale === 'es' ? 'Artículos' : 'Articles'
   const description =
     locale === 'es'
-      ? 'Análisis profundo sobre inteligencia artificial, geopolítica, bio-ingeniería y economía.'
-      : 'Deep analysis on artificial intelligence, geopolitics, bioengineering and economics.'
+      ? 'Artículos de análisis sobre inteligencia artificial, geopolítica tecnológica, bio-ingeniería y economía. Sin ruido, sin publicidad - solo señal.'
+      : 'Analysis on artificial intelligence, tech geopolitics, bioengineering and economics. No noise, no ads - signal only.'
 
   return {
     title,

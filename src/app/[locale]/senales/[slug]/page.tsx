@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? `${SITE_URL}/senales/${slug}`
       : `${SITE_URL}/en/senales/${slug}`
 
-  const hasBothLocales = Boolean(signal.titleEn && signal.contentEn?.length)
+  const hasBothLocales = Boolean(signal.titleEn && signal.contentEn?.length && signal.slugEn)
 
   return {
     title,

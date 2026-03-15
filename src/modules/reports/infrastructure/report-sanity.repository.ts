@@ -1,5 +1,5 @@
 import { sanityClient, isSanityConfigured } from '@/sanity/client'
-import { REPORTS_LIST_QUERY, REPORT_BY_SLUG_QUERY, REPORT_SLUGS_QUERY } from '@/sanity/queries'
+import { REPORTS_LIST_QUERY, REPORT_BY_SLUG_QUERY, REPORT_SLUGS_QUERY, REPORT_SLUGS_EN_QUERY } from '@/sanity/queries'
 import type { ReportRepository } from '../domain/report.repository'
 import type { Report, ReportPreview } from '../domain/types'
 
@@ -25,6 +25,12 @@ export const reportSanityRepository: ReportRepository = {
   getAllSlugs: async () => {
     if (!isSanityConfigured()) return []
     const results = await sanityClient.fetch<{ slug: string }[]>(REPORT_SLUGS_QUERY)
+    return results.map((r) => r.slug)
+  },
+
+  getAllEnSlugs: async () => {
+    if (!isSanityConfigured()) return []
+    const results = await sanityClient.fetch<{ slug: string }[]>(REPORT_SLUGS_EN_QUERY)
     return results.map((r) => r.slug)
   },
 }

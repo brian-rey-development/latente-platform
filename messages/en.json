@@ -5,7 +5,8 @@
     "reports": "Reports",
     "labs": "Labs",
     "store": "Store",
-    "manifesto": "Manifesto",
+    "about": "About",
+    "sections": "Sections",
     "access": "Access",
     "search": "Search",
     "cart": "Cart",
@@ -20,7 +21,7 @@
     "readMore": "Read report",
     "pages": "PAGES",
     "endOf": "End of report.",
-    "paywallMessage": "This report is exclusive to Latente subscribers. Join to read the full analysis."
+    "paywallMessage": "This report is reserved for subscribers. Latente delivers strategic intelligence on AI, geopolitics and bioengineering - no ads, no noise."
   },
   "labs": {
     "title": "LATENTE LABS.",
@@ -31,7 +32,9 @@
   },
   "home": {
     "noArticles": "No published articles.",
-    "featured": "Featured"
+    "featured": "Featured",
+    "tagline": "Strategic intelligence on the forces reshaping the world.",
+    "subtitle": ""
   },
   "signals": {
     "heading": "Signals",
@@ -75,11 +78,12 @@
     "linkedin": "LinkedIn",
     "telegram": "Telegram",
     "copyLink": "Copy link",
-    "copied": "Link copied"
+    "copied": "Link copied",
+    "close": "Close"
   },
   "paywall": {
-    "title": "SUBSCRIBERS ONLY",
-    "message": "This article is exclusive to Latente subscribers. Join to read the full analysis.",
+    "title": "CLASSIFIED",
+    "message": "This analysis is reserved for subscribers. Latente delivers strategic intelligence on AI, geopolitics and bioengineering - no ads, no noise.",
     "cta": "Subscribe"
   },
   "premium": {
@@ -88,7 +92,7 @@
   "store": {
     "heading1": "STORE.",
     "heading2": "",
-    "subtitle": "Publications, objects and Latente memberships.",
+    "subtitle": "Publications, objects and memberships. Built by Latente.",
     "noProducts": "No products available.",
     "addToCart": "Add {name} to cart"
   },
@@ -127,10 +131,11 @@
   "auth": {
     "panelTitle1": "ACCESS.",
     "panelTitle2": "",
-    "panelSubtitle": "Sign in to read the full analysis.",
+    "panelSubtitle": "Access the full analysis. No ads, no noise - pure strategic intelligence.",
     "loginTitle": "Sign in",
     "registerTitle": "Create account",
     "email": "Email",
+    "emailPlaceholder": "you@email.com",
     "password": "Password",
     "passwordPlaceholder": "Minimum 8 characters",
     "loginButton": "Sign in",
@@ -153,23 +158,27 @@
     "rights": "© {year} LATENTE. All rights reserved.",
     "articles": "Articles",
     "store": "Store",
-    "manifesto": "Manifesto",
+    "about": "About",
     "access": "Access"
   },
   "ticker": {
     "items": ["GEOPOLITICS", "ARTIFICIAL INTELLIGENCE", "BIO-ENGINEERING", "ECONOMICS"]
   },
-  "manifesto": {
-    "titleLine1": "THE",
-    "titleLine2": "MANIFESTO.",
-    "metaDescription": "Latente is a publication that emerges in the space between noise and silence.",
-    "lead": "We are not a media outlet. We are signal for the immediate future.",
-    "body1": "In an era defined by the collapse of shared truth and the exponential acceleration of hardware, traditional analysis has become obsolete. News is noise; code, semiconductors, and genomes are the real signal.",
-    "body2": "was born from a need for intellectual survival. We observe the brutal intersection between Artificial Intelligence, the geopolitics of scarcity, and the rewriting of biology.",
-    "quote": "The visual internet will become a nostalgic museum; the real economy will operate invisibly through submarine cables at the speed of light, between machines that don't need to understand human language.",
-    "body3": "Our promise is simple: Zero friction. Zero advertising. Pure strategic intelligence, delivered without embellishment. We believe in the right to understand the invisible forces packaging the world into silicon architectures.",
-    "protocol": "/// INITIATE PROTOCOL /// VERSION 4.0.1 ///",
-    "cta": "Read articles"
+  "about": {
+    "title": "ABOUT LATENTE.",
+    "metaDescription": "Strategic intelligence on AI, geopolitics, bioengineering and infrastructure. Deep analysis for decision-makers shaping the future.",
+    "whatTitle": "WHAT IS LATENTE",
+    "what": "Latente is an editorial publication on the forces reshaping the world. No ads, no noise - signal only.",
+    "coversTitle": "WHAT WE COVER",
+    "cover0": "Artificial Intelligence - The redesign of cognition and the economy.",
+    "cover1": "Bioengineering - The rewriting of the code of life.",
+    "cover2": "Geopolitics - The tensions redistributing global power.",
+    "cover3": "Infrastructure - The physical and digital systems that move the world.",
+    "cover4": "Culture - The ideas shaping what comes next.",
+    "forTitle": "FOR WHOM",
+    "for": "Founders, operators and intellectuals in LATAM making decisions about the future.",
+    "contactTitle": "CONTACT",
+    "contact": "contacto@latente.xyz"
   },
   "locale": {
     "switchTo": "ES",
@@ -180,7 +189,8 @@
   },
   "error": {
     "title": "Failed to load.",
-    "back": "Back to home"
+    "back": "Back to home",
+    "retry": "Retry"
   },
   "a11y": {
     "skipToContent": "Skip to main content"

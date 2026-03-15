@@ -26,6 +26,9 @@ export async function SiteFooter() {
             <Link href="/" className="block hover:text-brand transition-colors">
               {t("articles")}
             </Link>
+            <Link href="/sobre" className="block hover:text-brand transition-colors">
+              {t("about")}
+            </Link>
             {FEATURE_FLAGS.STORE_ENABLED && (
               <Link
                 href="/tienda"
