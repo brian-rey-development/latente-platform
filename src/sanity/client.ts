@@ -1,7 +1,8 @@
 import { createClient } from 'next-sanity'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'placeholder'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const projectId = (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'placeholder').trim()
+const rawDataset = (process.env.NEXT_PUBLIC_SANITY_DATASET || 'production').trim()
+const dataset = /^[a-z0-9_~][a-z0-9_-]*$/.test(rawDataset) ? rawDataset : 'production'
 const apiVersion = '2024-01-01'
 
 export const sanityClient = createClient({
