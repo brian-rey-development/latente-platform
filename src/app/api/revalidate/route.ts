@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import crypto from 'crypto'
 
 const LOCALES = ['es', 'en'] as const
@@ -36,36 +36,37 @@ export async function POST(request: Request) {
     revalidatePath(localePath(locale, '/tienda'), 'page')
   }
 
-  if (type === 'article' && slug) {
+  if (type === 'article') {
+    revalidateTag('articles', 'default')
+    if (slug) revalidateTag(`article-${slug}`, 'default')
     for (const locale of LOCALES) {
-      revalidatePath(localePath(locale, `/articulos/${slug}`), 'page')
+      revalidatePath(localePath(locale, '/articulos'), 'page')
+      if (slug) revalidatePath(localePath(locale, `/articulos/${slug}`), 'page')
     }
   }
 
   if (type === 'report') {
+    revalidateTag('reports', 'default')
+    if (slug) revalidateTag(`report-${slug}`, 'default')
     for (const locale of LOCALES) {
       revalidatePath(localePath(locale, '/reportes'), 'page')
-      if (slug) {
-        revalidatePath(localePath(locale, `/reportes/${slug}`), 'page')
-      }
+      if (slug) revalidatePath(localePath(locale, `/reportes/${slug}`), 'page')
     }
   }
 
   if (type === 'venture') {
     for (const locale of LOCALES) {
       revalidatePath(localePath(locale, '/labs'), 'page')
-      if (slug) {
-        revalidatePath(localePath(locale, `/labs/${slug}`), 'page')
-      }
+      if (slug) revalidatePath(localePath(locale, `/labs/${slug}`), 'page')
     }
   }
 
   if (type === 'signal') {
+    revalidateTag('signals', 'default')
+    if (slug) revalidateTag(`signal-${slug}`, 'default')
     for (const locale of LOCALES) {
       revalidatePath(localePath(locale, '/senales'), 'page')
-      if (slug) {
-        revalidatePath(localePath(locale, `/senales/${slug}`), 'page')
-      }
+      if (slug) revalidatePath(localePath(locale, `/senales/${slug}`), 'page')
     }
   }
 
